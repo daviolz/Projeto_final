@@ -22,22 +22,22 @@
         <ul>
             <li>
                 <button type="submit" name="tipo_produto" value="salgado" class='btn-nav'>
-                    <img src="img/nav_salgados.png" alt="salgados"><br>Salgados
+                    <img src="../img/nav_salgados.png" alt="salgados"><br>Salgados
                 </button>
             </li>
             <li>
                 <button type="submit" name="tipo_produto" value="bebida" class='btn-nav'>
-                    <img src="img/nav_bebidas.png" alt="bebidas"><br>Bebidas
+                    <img src="../img/nav_bebidas.png" alt="bebidas"><br>Bebidas
                 </button>
             </li>
             <li>
                 <button type="submit" name="tipo_produto" value="doce" class='btn-nav'>
-                    <img src="img/nav_doces.png" alt="doces"><br>Doces
+                    <img src="../img/nav_doces.png" alt="doces"><br>Doces
                 </button>
             </li>
             <li>
                 <button type="submit" name="tipo_produto" value="combo" class='btn-nav'>
-                    <img src="img/nav_combos.png" alt="combos"><br>Combos
+                    <img src="../img/nav_combos.png" alt="combos"><br>Combos
                 </button>
             </li>
         </ul>
@@ -50,7 +50,7 @@
         </div>
     </main>
     <footer>
-         <img src="img/Logo.png" alt="logo" class="logo">
+         <img src="../img/Logo.png" alt="logo" class="logo">
     <div class="op">
         <div class = "total">
             <h2>Total: R$ <?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></h2>

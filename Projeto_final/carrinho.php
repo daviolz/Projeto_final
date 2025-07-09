@@ -24,7 +24,7 @@ include_once 'php/conexao.php';
     <main>
       <div class="conteudo-carrinho">
         <div class="div-titulo">
-          <img src="img/carrinho.png" id="carrinho-titulo" alt="carrinho" />
+          <img src="../img/carrinho.png" id="carrinho-titulo" alt="carrinho" />
           <h1>Carrinho</h1>
         </div>
         <div class="div-carrinho">
@@ -38,7 +38,7 @@ include_once 'php/conexao.php';
             <div class="div-produto-carrinho">
               <img
                 class="imagem-produto-carrinho"
-                src="<?php echo htmlspecialchars($produto['imagem_produto']); ?>"
+                src="<?php echo '../' . htmlspecialchars($produto['imagem_produto']); ?>"
                 alt="<?php echo htmlspecialchars($produto['nome_produto']); ?>"
               />
               <div class="info-produto">
@@ -64,7 +64,7 @@ include_once 'php/conexao.php';
       </div>
     </main>
     <footer>
-      <img src="img/Logo.png" alt="logo" class="logo" />
+      <img src="../img/Logo.png" alt="logo" class="logo" />
       <div class="op">
         <div class="total">
           <h2>Total: R$ <?php echo number_format($total, 2, ',', '.'); ?></h2>

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nomeArquivo = preg_replace('/[^a-zA-Z0-9-_]/', '_', $nome); // substitui caracteres especiais por "_"
         $novoNome = $nomeArquivo . '.' . $extensao;
 
-        $caminho = '../img/';
+        $caminho = '../../img/';
         if (!is_dir($caminho)) {
             mkdir($caminho, 0777, true);
         }
