@@ -1,0 +1,392 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Tela de Login */
+
+body {
+  background-color: #f0f0f0;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container-login {
+  background-color: rgb(255, 255, 255);
+  width: 500px;
+  color: #B77344;
+  padding: 30px 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container-login h1 {
+  text-align: center;
+  color: #B77344;
+}
+
+.container-login .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  color: #B77344;
+  font-size: 15px;
+  padding: 20px 40px 20px 20px;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+}
+
+.input-box input::placeholder {
+  color: #B77344;
+}
+.input-box i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  bottom: 5px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.btn {
+  width: 100%;
+  height: 45px;
+  font-size: 16px;
+  border-radius: 40px;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #B77344;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.5s ease;
+}
+
+.btn:hover {
+  color: #fff;
+  background: #dfdfdf;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Navbar */
+a {
+  text-decoration: none;
+}
+
+header {
+  background-color: #B77344;
+  color: #fff;
+  font-size: 25px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 2;
+  border-bottom: 0.5px solid #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+header i {
+  font-size: 35px;
+}
+
+.btn-menu {
+  color: #fff;
+}
+
+nav {
+  height: calc(100% - 55px);
+  width: 0px;
+  position: fixed;
+  left: 0;
+  background-color: #B77344;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: width 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: fixed;
+  top: 55px;
+}
+
+nav a {
+  padding: 20px 10px 20px 20px;
+  font-size: 18px;
+  color: #fff;
+  display: block;
+  white-space: nowrap; /* Impede quebra de linha */
+  overflow: hidden; /* Esconde o texto que "passa" da largura do menu */
+  width: 100%; /* Ocupa toda a largura da nav */
+  box-sizing: border-box;
+  opacity: 1; /* Sempre visível, o efeito é só pelo corte da largura */
+  transition: background 0.2s, color 0.2s;
+  pointer-events: auto;
+}
+
+nav.aberto {
+  width: 250px;
+}
+
+nav a:hover {
+  background-color: #fafafa;
+  color: #B77344;
+}
+
+main {
+  transition: margin-left 0.3s;
+  padding: 75px 200px;
+}
+
+/* Cadastro */
+.wrapper-cadastro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-cadastro {
+  margin-top: 20px;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-box-cadastro {
+  margin-bottom: 20px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box-cadastro-row {
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.input-box-cadastro input,
+.input-box-cadastro select {
+  height: 40px;
+  padding: 0px 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgb(70, 70, 70);
+}
+
+.button-box-cadastro {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.button-box-cadastro input {
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+  background-color: #B77344;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-box-cadastro2 {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.button-box-cadastro2 input {
+  width: 200px;
+  height: 40px;
+  font-size: 18px;
+  background-color: #B77344;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.table th input[type="submit"]:hover {
+  background-color: #dfdfdf;
+}
+
+input[type="submit"] {
+  height: 40px;
+  font-size: 18px;
+  background-color: #B77344;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.table input[type="submit"]:hover {
+  background-color: #dfdfdf;
+}
+
+input[readonly] {
+  color: #646464;
+}
+
+.home-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 15px 0;
+}
+
+.home-option {
+  text-align: center;
+  width: 23%;
+  background-color: #B77344;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 35px 0;
+  position: relative; /* Adicione esta linha */
+  overflow: hidden; /* Garante que o link não ultrapasse a div */
+}
+
+.home-option:hover {
+  background-color: #dfdfdf;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.home-option a {
+  display: block; /* Faz o link ocupar toda a área */
+  width: 100%;
+  height: 100%;
+  color: inherit; /* Mantém a cor do texto */
+  text-decoration: none; /* Remove sublinhado */
+  position: absolute; /* Faz o link cobrir toda a div */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px 0; /* Igual ao padding da div */
+  z-index: 1;
+  /* Centraliza o texto verticalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.observacao-group{
+  display: flex;
+  gap: 30px;
+}
+
+.observacao-group button{
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #B77344;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+   margin-bottom: 30px;
+}
+
+.observacao-group button:hover{
+  background-color: #dfdfdf;
+ 
+}
+
+
+/* Tabela do historico */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table thead {
+  background-color: #dfdfdf;
+  color: rgb(176, 221, 172);
+}
+
+table thead th {
+  padding: 10px;
+  text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #dfdfdf;
+
+}
+
+table tbody td {
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+}
+
+
+.filtro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 40px;
+  font-size: 18px;
+  background-color: #B77344;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.selecaofiltro {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1.5px solid #B77344;
+  background-color: #eaf6ee;
+  color: #B77344;
+  font-size: 16px;
+  padding: 0 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.selecaofiltro:focus {
+  border: 2px solid #dfdfdf;
+  outline: none;
+  box-shadow: 0 0 5px #B7734433;
+}
+
+

@@ -1,0 +1,140 @@
+
+.container {
+  background-color: #B77344;
+  margin: 10px;
+  border: 2px solid #6f4528;
+  width: 80%;
+  border-radius: 10px;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 3.5em;
+  justify-content: center;
+}
+
+.container h1 {
+  color: white;
+  text-align: center;
+  font-weight: 200;
+}
+
+
+
+
+.titulo{
+            margin-top: 3em;
+            margin-bottom: 2em;
+            font-size: 2em;
+            font-family: jua;
+            text-align: center;
+            position: relative;
+}
+
+
+.totalzinho{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 25px;
+            font-family: jua;
+            text-align: center;
+            position: relative;
+            color: white;
+}
+
+table {
+    
+    width: 25em;
+    background-color:white;
+    border: none;
+    border-collapse: separate;
+ 
+}
+th {
+    background-color: #B77344;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+table th, table td {
+    border: none;
+    padding: 10px;
+}
+
+.baixinho {
+    border: #6f4528 solid 90px;
+    background-color: white;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    border-bottom: 1px solid #6f4528;
+}
+
+.produto{
+    width: 3em;
+    height: 3em;
+    
+}
+
+
+tr:last-child {
+  border-bottom: none; 
+}
+
+.nome {
+    font-weight: bold;
+    font-size: 1em;
+    color: #6f4528;
+}
+.descricao {
+    font-size: 0.7em;
+    color: black
+}
+.dinheiro {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #6f4528;
+}
+.preco {
+    color: white;
+    width: 5em;
+}
+.valor {
+    color: white;
+    width: 5em;
+
+}
+.qte{
+    color: white;
+}
+.item {
+    color: white;
+}
+
+.botao {
+    text-align: center;
+    border: 2px solid #B77344;
+    border-radius: 4em;
+    color: #B77344;
+    font-weight: bold;  
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 3.8em;
+    padding: 0 1em;
+    margin-left: 8em;
+    margin-top: 1.4em;
+    margin-bottom: 2em;
+    font-size: 1em;
+    
+}
+
+.pedido table th{
+    border: none;
+    border-collapse: collapse;
+}

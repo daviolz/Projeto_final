@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pedido.css">
+</head>
+<body>
+    <nav>
+        <form action="escolher.php" method="post">
+            <ul>
+                <li>
+                    <button type="submit" name="tipo_produto" value="salgado" class='btn-nav'>
+                        <img src="img/nav_salgados.png" alt="salgados"><br>Salgados
+                    </button>
+                </li>
+                <li>
+                    <button type="submit" name="tipo_produto" value="bebida" class='btn-nav'>
+                        <img src="img/nav_bebidas.png" alt="bebidas"><br>Bebidas
+                    </button>
+                </li>
+                <li>
+                    <button type="submit" name="tipo_produto" value="doce" class='btn-nav'>
+                        <img src="img/nav_doces.png" alt="doces"><br>Doces
+                    </button>
+                </li>
+                <li>
+                    <button type="submit" name="tipo_produto" value="combo" class='btn-nav'>
+                        <img src="img/nav_combos.png" alt="combos"><br>Combos
+                    </button>
+                </li>
+            </ul>
+        </form>
+    </nav>
+    <main>
+        <h2 class="titulo">Pedido</h2>
+        <div class="container">
+            <div class="pedido" style="margin: 0 auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="item">Item</th>
+                                <th class="preco">Preço</th>
+                                <th class="qte">Qte</th>
+                                <th class="valor">Valor</th>
+                            </tr>
+              
+                        </thead>
+                            
+                        <tbody>
+                            <tr class="baixinho">
+                                <td><img class= "produto"  src="img/coxinha.png" alt="coxinha"></td>
+                                <td>
+                                    <h4 class="nome">Coxinha</h4>
+                                    <h6 class="descricao">Frango c/ catupiry</h6>
+                                </td>
+                                <td class="dinheiro">R$ 6,50</td>
+                                <td>2</td>
+                                <td class="dinheiro">R$ 13,00</td>
+                            </tr>
+                            <tr class="baixinho">
+                                <td><img class= "produto" src="img/pudim.png" alt="pudim"></td>
+                                <td>
+                                    <h4 class="nome">Pudim</h4>
+                                    <h6 class="descricao">Tradicional Leite Condensado</h6>
+                                </td>
+                                <td class="dinheiro">R$ 7,00</td>
+                                <td>1</td>
+                                <td class="dinheiro">R$ 7,00</td>
+                            </tr>
+                            <tr class="baixinho">
+                                <td><img class= "produto" src="img/cafe.png" alt="cafe"></td>
+                                <td>
+                                    <h4 class="nome">Cafezinho</h4>
+                                    <h6 class="descricao">Cafe 100ml</h6>
+                                </td>
+                                <td class="dinheiro">R$ 1,50</td>
+                                <td>1</td>
+                                <td class="dinheiro">R$ 1,50</td>
+                            </tr>
+                            <tr class="baixinho">
+                                <td><img class= "produto" src="img/pastille.png" alt="pastille"></td>
+                                <td>
+                                    <h4 class="nome">Docile Pastille</h4>
+                                    <h6 class="descricao">Bala Pastille</h6>
+                                </td>
+                                <td class="dinheiro">R$ 1,00</td>
+                                <td>1</td>
+                                <td class="dinheiro">R$ 1,00</td>
+                            </tr>
+                            <!-- Adicione mais produtos conforme necessário -->
+                        </tbody>
+                    </table>
+                    <h2 class="totalzinho">Total: R$ 24,50</h2>
+                    <button type="submit" class="botao">Finalizar pedido</button>
+        </div>
+    </main>
+    <footer>
+         <img src="img/Logo.png" alt="logo" class="logo">
+    <div class="op">
+        <div class = "total">
+        <h2> Total: R$ 0,00</h2>
+        </div>
+        <div class = "baixo">
+        <button class='op-btn cancelar' onclick="window.location.href='php/deletar_conta.php'">Cancelar Pedido</button>
+        <button class='op-btn fazer' onclick="window.location.href='php/carrinho.html'">Fazer pedido</button>
+        </div>
+    </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+.div-conteudo {
+  margin: 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.div-produto {
+  height: 20svh;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.div-produto:hover {
+  border-radius: 20px;
+  outline-style: solid;
+  outline-color: rgb(227, 227, 227);
+}
+
+.imagem-produtos {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+}
