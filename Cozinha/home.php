@@ -26,7 +26,8 @@ include("PHP/protect.php");
     <?php
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
-            <a href='cadastrar_variacao.php'>Cadastrar Variação</a>";
+            <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
+            <a href='administrando_variacoes.php'>Administrar Variações</a>";
             
     }
     ?>
@@ -51,7 +52,7 @@ include("PHP/protect.php");
                <div class="home-option">
             <a href="administrando_variacoes.php">Administrar Variações</a>
           </div>
-          
+
         </div>
 
         <?php endif; ?>

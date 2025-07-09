@@ -89,7 +89,8 @@ $result = $stmt->get_result();
     <?php
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
-            <a href='cadastrar_variacao.php'>Cadastrar Variação</a>";
+            <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
+            <a href='administrando_variacoes.php'>Administrar Variações</a>";
             
     }
     ?>

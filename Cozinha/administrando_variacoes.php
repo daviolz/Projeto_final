@@ -87,7 +87,7 @@ $result = $stmt->get_result();
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
     <i class="bx bxs-user-circle"></i>
   </header>
-  <nav id="menu">
+ <nav id="menu">
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
@@ -95,7 +95,8 @@ $result = $stmt->get_result();
     <?php
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
-            <a href='cadastrar_variacao.php'>Cadastrar Variação</a>";
+            <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
+            <a href='administrando_variacoes.php'>Administrar Variações</a>";
             
     }
     ?>
