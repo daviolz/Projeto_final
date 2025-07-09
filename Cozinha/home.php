@@ -48,6 +48,10 @@ include("PHP/protect.php");
             <a href="cadastrar_variacao.php">Cadastrar Variação</a>
           </div>
 
+               <div class="home-option">
+            <a href="administrando_variacoes.php">Administrar Variações</a>
+          </div>
+          
         </div>
 
         <?php endif; ?>
