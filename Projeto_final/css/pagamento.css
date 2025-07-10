@@ -1,15 +1,11 @@
 
-
-
 .pedido {
-  
   background-color: #B77344;
   margin: 10px;
   border: 2px solid #6f4528;
   width: 70%;
   border-radius: 10px;
   height: auto;
-  
 }
 
 .pedido h1 {
@@ -26,16 +22,15 @@
   margin: 60px 0;
 }
 
-h2{
-            margin-top: 30px;
-            margin-bottom: 20px;
-            font-size: 25px;
-            font-family: jua;
-            text-align: center;
-            position: relative;
+main h2{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 25px;
+    text-align: center;
+    position: relative;
 }
 
-    .pagamento-opcao {
+.pagamento-opcao {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -78,12 +73,8 @@ h2{
     
 }
 
-.container {
- height: 43.5rem;
-}
 
 .button_atualiza {
-
     border: 2px solid #633f25;
     border-radius: 4em;
     color: #B77344;
