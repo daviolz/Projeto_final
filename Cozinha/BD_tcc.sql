@@ -13,7 +13,7 @@ INSERT INTO Usuario (Login, Senha, Nivel)
 VALUES 
     ('gerente@email.com', '123', 1),
     ('cozinha@email.com', '123', 2);
-
+    
 
 CREATE TABLE IF NOT EXISTS Conta(
     Cod_conta INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

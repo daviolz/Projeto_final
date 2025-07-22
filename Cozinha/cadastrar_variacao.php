@@ -12,6 +12,9 @@ if ($_SESSION['nivel'] != 1) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <link rel="stylesheet" href="CSS/style.css">
   <title>Cadastrar aluno</title>
 
@@ -143,6 +146,26 @@ if ($_SESSION['nivel'] != 1) {
       }
     }
   </script>
+<script>
+  $(document).ready(function() {
+    function initSelect2() {
+      $('#produto').select2({
+        placeholder: "Selecione ou pesquise um produto",
+        dropdownParent: $('.container-cadastro'),
+        width: '100%'
+      });
+    }
+
+    initSelect2();
+
+    $('.btn-menu').on('click', function() {
+      setTimeout(function() {
+        $('#produto').select2('destroy');
+        initSelect2();
+      }, 350); 
+    });
+  });
+</script>
 </body>
 
 </html>

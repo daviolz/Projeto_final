@@ -1,6 +1,18 @@
 CREATE DATABASE Projeto_final;
 USE Projeto_final;
 
+CREATE TABLE Usuario (
+    Cod_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    Login VARCHAR(80),
+    Senha VARCHAR(80),
+    Nivel INT
+);
+
+INSERT INTO Usuario (Login, Senha, Nivel) 
+VALUES 
+    ('gerente@email.com', '123', 1),
+    ('cozinha@email.com', '123', 2);
+
 CREATE TABLE IF NOT EXISTS Comanda(
     Cod_comanda INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Data_hora Timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
