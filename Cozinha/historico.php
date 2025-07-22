@@ -72,6 +72,9 @@ $result = $stmt->get_result();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <link rel="stylesheet" href="CSS/style.css">
   <title>Histórico</title>
 </head>
@@ -133,8 +136,8 @@ $result = $stmt->get_result();
         <label>Data:
             <input type="date" name="data" value="<?= isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '' ?>">
         </label>
-        <button type="submit">Filtrar</button>
-        <a href="historico.php" style="margin-left:10px;">Limpar filtros</a>
+        <button type="submit" class="btn-filtro">Filtrar</button>
+        <a href="historico.php" class="btn-limpar">Limpar filtros</a>
     </form>
     <table border="1" cellpadding="6" cellspacing="0" style="width:100%;background:#fff;">
         <tr>
@@ -163,6 +166,14 @@ $result = $stmt->get_result();
         <?php endif; ?>
     </table>
   </main>
+  <script>
+  $(document).ready(function() {
+    $('select[name="comanda"], select[name="produto"], select[name="variacao"]').select2({
+      width: 'resolve',
+      dropdownParent: $('.container-cadastro').length ? $('.container-cadastro') : $('body')
+    });
+  });
+</script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

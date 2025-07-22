@@ -95,12 +95,11 @@ header {
   background-color: #B77344;
   color: #fff;
   font-size: 25px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   width: 100%;
   z-index: 2;
-  border-bottom: 0.5px solid #fff;
   position: fixed;
   top: 0;
   left: 0;
@@ -159,6 +158,12 @@ main {
 }
 
 /* Cadastro */
+h2 {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
 .wrapper-cadastro {
   display: flex;
   flex-direction: column;
@@ -189,6 +194,11 @@ main {
   flex-direction: column;
 }
 
+.input-box-cadastro label {
+  margin-bottom: 7px;
+  color: #B77344;
+}
+
 .input-box-cadastro-row {
   height: 70px;
   display: flex;
@@ -198,32 +208,48 @@ main {
   gap: 20px;
 }
 
-.input-box-cadastro input s{
-  height: 40px;
+.input-box-cadastro input[type="text"],
+.input-box-cadastro input[type="number"]{
+  height: 35px;
   padding: 0px 10px;
   width: 100%;
-  border-radius: 5px;
   border: 1px solid rgb(70, 70, 70);
 }
 
 .input-box-cadastro select,
 .input-box-cadastro select:focus {
-  background-color: #000 !important;
+  background-color: #00000000 !important;
   color: #fff !important;
   border: 1px solid rgb(70, 70, 70);
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  padding: 8px 5px;
+  border-radius: 5px;
 }
 
+
+input[type="file"]::file-selector-button {
+  background: #B77344;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 3px 5px;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #dfdfdf;
+  color: #B77344;
+}
 .button-box-cadastro {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  
 }
 
 .button-box-cadastro input {
-  width: 100px;
+  width: 150px;
   height: 40px;
   font-size: 18px;
   background-color: #B77344;
@@ -231,6 +257,22 @@ main {
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  margin: 0 10px;
+}
+
+.buttom-box-cadastro input:hover {
+  background-color: #dfdfdf;
+}
+.button-box-cadastro button {
+  width: 160px;
+  height: 40px;
+  font-size: 18px;
+  background-color: #B77344;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
 }
 
 .button-box-cadastro2 {
@@ -402,4 +444,49 @@ table tbody td {
   box-shadow: 0 0 5px #B7734433;
 }
 
+.select2-container {
+  width: 220px !important; 
+  font-size: 16px;
+}
+.select2-selection {
+  height: 30px !important;
+  border-radius: 5px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.select2-selection__rendered {
+  line-height: 30px !important;
+}
 
+label input[type="date"] {
+  height: 30px;
+  padding: 3px 10px;
+  margin-right: 10px;
+}
+
+.btn-filtro[type="submit"] {
+  width: 50px;
+  height: 30px;
+  font-size: 16px;
+  background-color: #B77344;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-filtro:hover {
+  background-color: #dfdfdf;
+  color: #B77344;
+}
+
+.btn-limpar {
+  margin-left: 10px;
+  text-decoration: none;
+  color: #B77344;
+  font-size: 16px;
+  border : 1px solid #ffffff;
+  padding: 5px 10px;
+}

@@ -71,7 +71,7 @@ if ($_SESSION['nivel'] != 1) {
   </nav>
 
   <main id="content">
-        <h2>Cadastrar Produto</h2>
+        <h2>Cadastro de variação de produto</h2>
     <div class="wrapper-cadastro">
         <div class="container-cadastro">
             <form action="PHP/nv_variacao.php" method="POST">
