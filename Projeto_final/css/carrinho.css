@@ -1,89 +1,86 @@
 .conteudo-carrinho {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .div-titulo {
-    margin: 4em 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
+  margin: 4em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
 
 .div-carrinho {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2em;
-    border: 2px solid #8c6f3f;
-    border-radius: 1em;
-    width: 80%;
-    padding: 2em 2.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  border: 2px solid #8c6f3f;
+  border-radius: 1em;
+  width: 80%;
+  padding: 2em 2.3em;
 }
 
-.imagens-carrinho{
-    width: 20px;
+.imagens-carrinho {
+  width: 20px;
 }
 
 .div-produto-carrinho {
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.5fr;
-    align-items: center;
-    gap: 16px;
-    padding: 0 0 6px 0;
-    border-bottom: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 0.5fr;
+  align-items: center;
+  gap: 16px;
+  padding: 0 0 6px 0;
+  border-bottom: 1px solid #eee;
 }
 
 .imagem-produto-carrinho {
-    width: 4.06em;
-    height: 4.06em;
-    object-fit: contain;
+  width: 4.06em;
+  height: 4.06em;
+  object-fit: contain;
 }
 
 .info-produto {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.preco-produto{
-    text-align: end;
-    color: #555;
+.preco-produto {
+  text-align: end;
+  color: #555;
 }
-
 
 .controle-qtd {
-    right: 0;
-    display: flex;
-    border: 1px solid #8c6f3f;
-    align-items: center;
-    gap: 10px;
-    background: #f8f8f8;
-    border-radius: 18px;
-    padding: 2px 10px;
-    margin-left: auto;
+  right: 0;
+  display: flex;
+  border: 1px solid #8c6f3f;
+  align-items: center;
+  gap: 10px;
+  background: #f8f8f8;
+  border-radius: 18px;
+  padding: 2px 10px;
+  margin-left: auto;
 }
 
 .controle-qtd span {
-    background: none;
-    border: none;
-    width: 24px;
-    height: 24px;
-    color: #8c6f3f;
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  color: #8c6f3f;
 }
 
-
-
 .total-carrinho {
-    text-align: center;
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
+  text-align: center;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  color: #388e3c;
 }
 
 .total-valor {
-    margin-left: 10px;
-    color: #388e3c;
+  margin-left: 10px;
 }

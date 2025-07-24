@@ -1,4 +1,4 @@
-<?php
+?<?php
     include_once 'php/conexao.php';
     session_start();
 
@@ -57,7 +57,7 @@
             }
         }
 
-    
+
         // Volta para a página de escolha de produtos
         header("Location: escolher.php?tipo_produto=" . urlencode($_SESSION['tipo_produto']));
         exit();
@@ -89,7 +89,7 @@
         header("Location: index.php");
         exit();
     }
-?>
+    ?>
 
 <!-- Código da Página -->
 <!DOCTYPE html>
@@ -104,7 +104,7 @@
 
 <body>
 
-<!-- Nav Bar com as opções -->
+    <!-- Nav Bar com as opções -->
     <nav>
         <form action="escolher.php" method="post">
             <ul>
@@ -157,90 +157,88 @@
             </div>
 
             <?php
-                // Pega os sabores disponíveis para o produto
-                $query_sabores = "SELECT * FROM Produto_Variacao WHERE Cod_produto = '$cod_produto'";
-                $resultado_sabores = mysqli_query($conexao, $query_sabores);
-
-                
-                if ($resultado_sabores) {
+            // Pega os sabores disponíveis para o produto
+            $query_sabores = "SELECT * FROM Produto_Variacao WHERE Cod_produto = '$cod_produto'";
+            $resultado_sabores = mysqli_query($conexao, $query_sabores);
 
 
-                    $num_variacoes = mysqli_num_rows($resultado_sabores);
+            if ($resultado_sabores) {
 
-                    // Exibição caso o produto tenha apenas uma variação
-                    if ($num_variacoes == 1) {
-                    
-                        $linha_sabor = mysqli_fetch_assoc($resultado_sabores);
+
+                $num_variacoes = mysqli_num_rows($resultado_sabores);
+
+                // Exibição caso o produto tenha apenas uma variação
+                if ($num_variacoes == 1) {
+
+                    $linha_sabor = mysqli_fetch_assoc($resultado_sabores);
+                    $cod_variacao = $linha_sabor['Cod_variacao'];
+                    $nome_variacao = $linha_sabor['Nome_variacao'];
+                    $preco_variacao = $linha_sabor['Preco'];
+                    echo "<div class='adicionar'>";
+                    echo "<form action='' method='POST'>";
+
+                    echo "<input type='hidden' name='cod_produto' value='" . $cod_produto . "'>";
+                    echo "<input type='hidden' name='nome_produto' value='" . $produto['Nome_produto'] . "'>";
+                    echo "<input type ='hidden' name='imagem_produto' value='" . $produto['Imagem_produto'] . "'>";
+                    echo "<input type='hidden' name='nome_variacao[$cod_variacao]' value='" . $nome_variacao . "'>";
+                    echo "<input type='hidden' name='preco_variacao[$cod_variacao]' value='" . $preco_variacao . "'>";
+
+                    echo "<div class='opcao-produto-unica'>";
+
+                    echo "<div class='qte'>";
+                    echo "<span class='qte-menos'>-</span>";
+                    echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='01' min='0' required>";
+                    echo "<span class='qte-mais'>+</span>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</form>";
+                    echo "</div>";
+                } elseif ($num_variacoes > 1) {
+                    // Exibição caso o produto tenha múltiplas variações
+
+                    echo "<div class='linha-separadora'></div>";
+                    echo "<div class='adicionar'>";
+                    echo "<h1>Sabores Disponíveis</h1>";
+                    echo "<form action='' method='POST'>";
+                    echo "<input type='hidden' name='cod_produto' value='" . $cod_produto . "'>";
+                    echo "<input type='hidden' name='nome_produto' value='" . $produto['Nome_produto'] . "'>";
+
+                    // Variavel para deixar o primeiro sabor com quantidade 1
+                    $primeiro = true;
+
+                    // Essa função reseta o ponteiro do resultado para o início,
+                    // permitindo que possamos percorrer novamente os resultados
+                    mysqli_data_seek($resultado_sabores, 0);
+
+
+                    while ($linha_sabor = mysqli_fetch_assoc($resultado_sabores)) {
                         $cod_variacao = $linha_sabor['Cod_variacao'];
                         $nome_variacao = $linha_sabor['Nome_variacao'];
                         $preco_variacao = $linha_sabor['Preco'];
-                        echo "<div class='adicionar'>";
-                        echo "<form action='' method='POST'>";
-                        
-                        echo "<input type='hidden' name='cod_produto' value='" . $cod_produto . "'>";
-                        echo "<input type='hidden' name='nome_produto' value='" . $produto['Nome_produto'] . "'>";
-                        echo "<input type ='hidden' name='imagem_produto' value='" . $produto['Imagem_produto'] . "'>";
-                        echo "<input type='hidden' name='nome_variacao[$cod_variacao]' value='" . $nome_variacao . "'>";
-                        echo "<input type='hidden' name='preco_variacao[$cod_variacao]' value='" . $preco_variacao . "'>";
-                    
-                        echo "<div class='opcao-produto-unica'>";
 
+                        // Define o valor inicial como 1 para o primeiro sabor, e 0 para os demais
+                        // Isso garante que o primeiro sabor tenha quantidade 1, e os demais 0
+
+                        $valor = $primeiro ? 1 : 0;
+                        echo "<div class='opcao-produto'>";
+                        echo "<div class='nome-opcao'><span>$nome_variacao</span><br><span>R$ " . number_format($preco_variacao, 2, ',', '.') . "</span></div>";
                         echo "<div class='qte'>";
                         echo "<span class='qte-menos'>-</span>";
-                        echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='01' min='0' required>";
+                        echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='" . str_pad($valor, 2, '0', STR_PAD_LEFT) . "' min='0' required>";
                         echo "<span class='qte-mais'>+</span>";
                         echo "</div>";
+                        echo "<input type='hidden' name='nome_variacao[$cod_variacao]' value='" . htmlspecialchars($nome_variacao, ENT_QUOTES) . "'>";
+                        echo "<input type='hidden' name='preco_variacao[$cod_variacao]' value='" . $preco_variacao . "'>";
                         echo "</div>";
-                        echo "</form>";
-                        echo "</div>";
 
-
-                    } elseif ($num_variacoes > 1) {
-                        // Exibição caso o produto tenha múltiplas variações
-                        
-                        echo "<div class='linha-separadora'></div>";
-                        echo "<div class='adicionar'>";
-                        echo "<h1>Sabores Disponíveis</h1>";
-                        echo "<form action='' method='POST'>";
-                        echo "<input type='hidden' name='cod_produto' value='" . $cod_produto . "'>";
-                        echo "<input type='hidden' name='nome_produto' value='" . $produto['Nome_produto'] . "'>";
-                        
-                        // Variavel para deixar o primeiro sabor com quantidade 1
-                        $primeiro = true;
-
-                        // Essa função reseta o ponteiro do resultado para o início,
-                        // permitindo que possamos percorrer novamente os resultados
-                        mysqli_data_seek($resultado_sabores, 0); 
-
-
-                        while ($linha_sabor = mysqli_fetch_assoc($resultado_sabores)) {
-                            $cod_variacao = $linha_sabor['Cod_variacao'];
-                            $nome_variacao = $linha_sabor['Nome_variacao'];
-                            $preco_variacao = $linha_sabor['Preco'];
-
-                            // Define o valor inicial como 1 para o primeiro sabor, e 0 para os demais
-                            // Isso garante que o primeiro sabor tenha quantidade 1, e os demais 0
-                            
-                            $valor = $primeiro ? 1 : 0;
-                            echo "<div class='opcao-produto'>";
-                            echo "<div class='nome-opcao'><span>$nome_variacao</span><br><span>R$ " . number_format($preco_variacao, 2, ',', '.') . "</span></div>";
-                            echo "<div class='qte'>";
-                            echo "<span class='qte-menos'>-</span>";
-                            echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='" . str_pad($valor, 2, '0', STR_PAD_LEFT) . "' min='0' required>";
-                            echo "<span class='qte-mais'>+</span>";
-                            echo "</div>";
-                            echo "<input type='hidden' name='nome_variacao[$cod_variacao]' value='" . htmlspecialchars($nome_variacao, ENT_QUOTES) . "'>";
-                            echo "<input type='hidden' name='preco_variacao[$cod_variacao]' value='" . $preco_variacao . "'>";
-                            echo "</div>";
-
-                            // Define que o primeiro sabor já foi exibido
-                            $primeiro = false;
-                        }
-
-                        echo "</form>";
-                        echo "</div>";
+                        // Define que o primeiro sabor já foi exibido
+                        $primeiro = false;
                     }
+
+                    echo "</form>";
+                    echo "</div>";
                 }
+            }
             ?>
     </main>
     <footer>
@@ -251,7 +249,7 @@
             </div>
             <div class="baixo">
                 <button class='op-btn cancelar' onclick="window.location.href='escolher.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Voltar</button>
-                
+
                 <button class='op-btn fazer' id="adicionar-footer-btn">Adicionar ao Carrinho</button>
             </div>
         </div>
@@ -292,4 +290,5 @@
         }
     </script>
 </body>
+
 </html>
