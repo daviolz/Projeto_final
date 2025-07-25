@@ -15,4 +15,3 @@ if ($mysqli->connect_errno) {
     die("Falha na conexão: " . $mysqli->connect_error);
 }
 ?>
-o
