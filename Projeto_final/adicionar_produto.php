@@ -133,7 +133,7 @@
     </nav>
 
     <!-- Exibição da página -->
-    <main>
+    <main >
         <div class="conteudo-produto">
 
             <div class="produto">

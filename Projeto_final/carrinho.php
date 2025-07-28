@@ -16,15 +16,11 @@ $total = 0.0;
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/carrinho.css" />
   <title>Carrinho</title>
-  <style>
-    main {
-      margin-left: 0;
-    }
-  </style>
+
 </head>
 
 <body>
-  <main>
+  <main style="margin-left: 0;">
     <div class="conteudo-carrinho">
       <div class="div-titulo">
         <img src="../img/carrinho.png" id="carrinho-titulo" alt="carrinho" />
@@ -38,10 +34,7 @@ $total = 0.0;
             $subtotal = $produto['preco'] * $produto['qte'];
             $total += $subtotal;
           ?> 
-          <?php 
-            $_SESSION['total'] = $total;
-            $_SESSION['carrinho'] = $carrinho;
-          ?>
+          
             <div class="div-produto-carrinho">
               <img
                 class="imagem-produto-carrinho"
@@ -65,7 +58,7 @@ $total = 0.0;
           <?php endforeach; ?>
           <div class="total-carrinho">
             <h2>Total: R$</h2>
-            <h2 class="total-valor"><?php echo number_format($total, 2, ',', '.'); ?></h2>
+            <h2 class="total-valor"><?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></h2>
           </div>
         <?php endif; ?>
       </div>
@@ -75,7 +68,7 @@ $total = 0.0;
     <img src="../img/Logo.png" alt="logo" class="logo" />
     <div class="op">
       <div class="total">
-        <h2>Total: R$ <span id="footer-total"><?php echo number_format($total, 2, ',', '.'); ?></span></h2>
+        <h2>Total: R$ <span id="footer-total"><?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></span></h2>
       </div>
       <div class="baixo">
         <button class="op-btn cancelar" onclick="window.location.href='escolher.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Voltar</button>
@@ -84,61 +77,75 @@ $total = 0.0;
     </div>
   </footer>
 
+  <!-- Script para utilizar o jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
   <script>
-    // Função para formatar número como moeda BRL
-    function formatarMoeda(valor) {
-      return valor.toLocaleString('pt-BR', { // vai retornar o numero formatado para o padrão brasileiro
-        minimumFractionDigits: 2, // Garante que sempre terá duas casas decimais
-        maximumFractionDigits: 2 // Garante que nunca terá mais que duas casas decimais
-      });
-    }
-
-    // Função DOM para atualizar o total e fazer os inputs de quantidade dinâmicos
-
-    // Pega todos os elementos de produto no carrinho
-    document.querySelectorAll('.div-produto-carrinho').forEach(function(produtoDiv) {
-      const menos = produtoDiv.querySelector('.qte-menos'); //Variável para o botão de menos
-      const mais = produtoDiv.querySelector('.qte-mais'); // Variável para o botão de mais
-      const input = produtoDiv.querySelector('.qte-input'); // Input de quantidade
-
-
-      // Função para atualizar o total na div e também no footer
-      function atualizarTotalGeral() {
-        let total = 0; // Variável para o total
-        // Percorre todos os produtos no carrinho
-        document.querySelectorAll('.div-produto-carrinho').forEach(function(div) {
-          const input = div.querySelector('.qte-input'); // Pega o input de quantidade
-          const preco = parseFloat(input.getAttribute('data-preco')); // Pega o preço do produto
-          let qte = parseInt(input.value, 10); // Pega a quantidade do input transformada em inteiro e no sistema decimal
-          if (isNaN(qte) || qte < 1) qte = 1; // Garante que a quantidade é pelo menos 1
-          total += preco * qte; // Atualiza o total com o preço do produto multiplicado pela quantidade
-        });
-        // Atualiza o texto do total na div e no footer
-        document.querySelectorAll('.total-valor, #footer-total').forEach(function(el) {
-          el.textContent = formatarMoeda(total); //Chama a função de formatação de moeda
-        });
-      }
-
-      // Evento que atualiza a quantidade e o total quando os botões de mais é clicado
-      mais.addEventListener('click', function() {
-        let valor = parseInt(input.value, 10); // Pega o valor atual do input
-        valor++; // Aumenta a qte
-        input.value = valor; // Atualiza o valor do input
-        atualizarTotalGeral(); // Atualiza o total geral
-        atualizarCarrinhoNoServidor(input); // Função que atualiza o carrinho no servidor(ainda não implementada)
-      });
-
-      // Evento que atualiza a quantidade e o total quando os botões de menos é clicado
-      menos.addEventListener('click', function() {
-        let valor = parseInt(input.value, 10);
-        if (valor > 1) {
-          valor--; // Se for maior que 1, diminui a qte
-          input.value = valor; //Atualiza o valor do input
-          atualizarTotalGeral(); // Atualiza o total geral
-          atualizarCarrinhoNoServidor(input); // Função que atualiza o carrinho no servidor(ainda não implementada)
-        }
-      });
+  // Função para formatar número como moeda BRL
+  function formatarMoeda(valor) {
+    return valor.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
+  }
+
+  
+  
+  // Adiciona eventos de clique para os botões de mais e menos
+  document.querySelectorAll('.div-produto-carrinho').forEach(function(produtoDiv) {
+    // Variaveis dos botões e input
+    const menos = produtoDiv.querySelector('.qte-menos');
+    const mais = produtoDiv.querySelector('.qte-mais');
+    const input = produtoDiv.querySelector('.qte-input');
+
+    // Evento quando apertar o botão "+"
+    mais.addEventListener('click', function() {
+      let valor = parseInt(input.value, 10) || 1; 
+      valor++;
+      input.value = valor;
+      atualizarCarrinhoNoServidor(input);
+    });
+
+    // Evento quando apertar o botão "-"
+    menos.addEventListener('click', function() {
+      let valor = parseInt(input.value, 10) || 1;
+      if (valor > 1) {
+        valor--;
+        input.value = valor;
+        atualizarCarrinhoNoServidor(input);
+      }
+    });
+
+    // Função AJAX usando jQuery
+  function atualizarCarrinhoNoServidor(input) {
+    const codVariacao = input.name.match(/\d+/)[0];
+    const qte = parseInt(input.value, 10);
+
+    $.ajax({
+      url: 'php/atualizar_carrinho.php',
+      type: 'POST',
+      data: {
+        cod_variacao: codVariacao,
+        qte: qte
+      },
+      dataType: 'json',
+      success: function(response) {
+        if (response && response.success) {
+          document.querySelectorAll('.total-valor, #footer-total').forEach(function(el) {
+            el.textContent = formatarMoeda(response.total);
+          });
+        } else {
+          alert('Erro ao atualizar o carrinho!');
+        }
+      },
+      error: function() {
+        alert('Erro ao comunicar com o servidor!');
+      }
+    });
+  }
+
+  });
   </script>
 
 </body>

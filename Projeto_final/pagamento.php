@@ -2,11 +2,7 @@
 include_once 'php/conexao.php';
 session_start();
 $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
-$total = 0.0;
-foreach ($carrinho as $produto) {
-    $subtotal = $produto['preco'] * $produto['qte'];
-    $total += $subtotal;
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,46 +16,42 @@ foreach ($carrinho as $produto) {
     
 </head>
 <body>
-    <main>
-        <h2>Pagamento</h2>
+    <main class="main-pagamento">
+        <div class="titulo-pagamento">
+            <h2>Pagamento</h2>
+        </div>
         <div class="container">
-            <div class="pedido" style="margin: 0 auto;">
-                    <form action="" method="post"> 
-                    <div class="input-container">
-                        <label class="pagamento-opcao">
-                            <input type="radio" name="pagamento" value="1" required>
-                            <img src="../img/cartao.png" alt="Cartão de Crédito">
-                            <span>Cartão de Crédito</span>
-                        </label>
-                        <label class="pagamento-opcao">
-                            <input type="radio" name="pagamento" value="2">
-                            <img src="../img/cartao.png" alt="Cartão de Débito">
-                            <span>Cartão de Débito</span>
-                        </label>
-                        <label class="pagamento-opcao">
-                            <input type="radio" name="pagamento" value="3">
-                            <img src="../img/pix.png" alt="Pix">
-                            <span>Pix</span>
-                        </label>
-                        <label class="pagamento-opcao">
-                            <input type="radio" name="pagamento" value="4">
-                            <img src="../img/dinheriro.png" alt="Dinheiro">
-                            <span>Dinheiro</span>
-                        </label>
+            <div class="opcoes-pagamento">
+                <form action="" method="post">
+                    <div class="opcao">
+                        <input type="radio" name="pagamento" id="credito" value="1" required>
+                        <label for="credito"><img src="../img/cartao.png" alt="Cartão de Crédito">Cartão de Crédito</label>
                     </div>
-                    <div class="botaopag">
-                    <button type="submit" class="button_atualiza">Fechar pedido</button>
-                        </div>
+                    <div class="opcao">
+                        <input type="radio" name="pagamento" id="debito" value="2" required>
+                        <label for="debito"><img src="../img/cartao.png" alt="Cartão de Débito">Cartão de Débito</label>
+                    </div>
+                    <div class="opcao">
+                        <input type="radio" name="pagamento" id="pix" value="3" required>
+                        <label for="pix"><img src="../img/pix.png" alt="Pix">Pix</label>
+                    </div>
+                    <div class="opcao">
+                        <input type="radio" name="pagamento" id="dinheiro" value="4" required>
+                        <label for="dinheiro"><img src="../img/dinheriro.png" alt="Dinheiro">Dinheiro</label>
+                    </div>
+                   
+                </form>
             </div>
+        </div>
     </main>
     <footer>
          <img src="../img/Logo.png" alt="logo" class="logo">
     <div class="op">
       <div class="total">
-        <h2>Total: R$ <span id="footer-total"><?php echo number_format($total, 2, ',', '.'); ?></span></h2>
+        <h2>Total: R$ <span id="footer-total"><?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></span></h2>
       </div>
         <div class = "baixo">
-        <button class='op-btn cancelar' onclick="window.location.href='php/deletar_conta.php'">Cancelar Pedido</button>
+        <button class='op-btn cancelar' onclick="window.location.href='php/deletar_comanda.php'">Cancelar Pedido</button>
         <button class='op-btn fazer' onclick="window.location.href='php/carrinho.html'">Fazer pedido</button>
         </div>
     </div>
