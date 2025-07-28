@@ -55,7 +55,7 @@ if (isset($_POST['login']) && strlen($_POST['login']) > 0) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <!-- Importa o CSS principal do projeto -->
+  <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css" />
   <!-- Importa ícones da biblioteca Boxicons -->
   <link

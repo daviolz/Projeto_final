@@ -1,17 +1,19 @@
 <?php
+// Protege a página: só usuários autenticados podem acessar
 include("PHP/protect.php");
 require_once("PHP/conexao.php");
 
-// Troca status se solicitado
+// Troca o status da variação se solicitado via GET (toggle)
 if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])) {
     $id = intval($_GET['toggle']);
-    // Busca status atual
+    // Busca o status atual da variação
     $res = $mysqli->query("SELECT Status FROM Produto_Variacao WHERE Cod_variacao = $id");
     if ($res && $row = $res->fetch_assoc()) {
+        // Alterna entre 'disponivel' e 'indisponivel'
         $novoStatus = ($row['Status'] === 'disponivel') ? 'indisponivel' : 'disponivel';
         $mysqli->query("UPDATE Produto_Variacao SET Status = '$novoStatus' WHERE Cod_variacao = $id");
     }
-    // Redireciona para evitar reenvio do formulário
+    // Redireciona para evitar reenvio do formulário e mantém os filtros
     $url = strtok($_SERVER["REQUEST_URI"],'?');
     $query = $_GET;
     unset($query['toggle']);
@@ -20,49 +22,54 @@ if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])) {
     exit;
 }
 
-// Busca tipos de produto
+// Busca todos os tipos de produto para o filtro
 $tipos = [];
 $resTipos = $mysqli->query("SELECT DISTINCT Tipo_produto FROM Produto");
 while($row = $resTipos->fetch_assoc()) {
     $tipos[] = $row['Tipo_produto'];
 }
 
-// Filtros
+// Monta filtros dinâmicos conforme os parâmetros GET
 $filtros = [];
 $params = [];
 $tipos_param = "";
 
+// Filtro por tipo de produto
 if (!empty($_GET['tipo_produto'])) {
     $filtros[] = "Produto.Tipo_produto = ?";
     $params[] = $_GET['tipo_produto'];
     $tipos_param .= "s";
 }
+// Filtro por produto específico
 if (!empty($_GET['produto'])) {
     $filtros[] = "Produto.Cod_produto = ?";
     $params[] = $_GET['produto'];
     $tipos_param .= "i";
 }
+// Filtro por disponibilidade (status)
 if (isset($_GET['disponibilidade']) && $_GET['disponibilidade'] !== "") {
     $filtros[] = "Produto_Variacao.Status = ?";
     $params[] = $_GET['disponibilidade'];
     $tipos_param .= "s";
 }
 
+// Monta a cláusula WHERE se houver filtros
 $where = "";
 if ($filtros) {
     $where = "WHERE " . implode(" AND ", $filtros);
 }
 
-// Busca produtos para o filtro
+// Busca todos os produtos para o filtro de produto
 $produtos = $mysqli->query("SELECT Cod_produto, Nome_produto FROM Produto");
 
-// Monta a query principal
+// Monta a query principal para buscar as variações, já com JOIN no produto
 $sql = "SELECT Produto_Variacao.*, Produto.Nome_produto, Produto.Tipo_produto 
         FROM Produto_Variacao 
         JOIN Produto ON Produto_Variacao.Cod_produto = Produto.Cod_produto
         $where
         ORDER BY Produto.Nome_produto, Produto_Variacao.Nome_variacao";
 
+// Prepara e executa a query com os filtros
 $stmt = $mysqli->prepare($sql);
 if ($params) {
     $stmt->bind_param($tipos_param, ...$params);
@@ -77,27 +84,34 @@ $result = $stmt->get_result();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Ícones Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- CSS principal -->
   <link rel="stylesheet" href="CSS/style.css">
+  <!-- CSS e JS do Select2 para selects bonitos -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <title>Home</title>
 </head>
 
 <body>
   <header>
+    <!-- Menu lateral e ícone de usuário -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
     <i class="bx bxs-user-circle"></i>
   </header>
  <nav id="menu">
+    <!-- Links do menu lateral -->
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
-
     <?php
+    // Se for admin, mostra opções administrativas
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
             <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
             <a href='administrando_variacoes.php'>Administrar Variações</a>";
-            
     }
     ?>
 
@@ -106,6 +120,7 @@ $result = $stmt->get_result();
 
   <main id="content">
     <h2>Variações de Produtos</h2>
+    <!-- Formulário de filtros -->
     <form method="get" style="margin-bottom:20px;">
         <label>Tipo do Produto:
             <select name="tipo_produto" onchange="this.form.submit()">
@@ -121,7 +136,7 @@ $result = $stmt->get_result();
             <select name="produto" onchange="this.form.submit()">
                 <option value="">Todos</option>
                 <?php
-                // Refaça a consulta para não esgotar o result set
+                // Reexecuta a consulta para garantir que o result set não foi esgotado
                 $produtos = $mysqli->query("SELECT Cod_produto, Nome_produto FROM Produto");
                 while($p = $produtos->fetch_assoc()): ?>
                     <option value="<?= $p['Cod_produto'] ?>" <?= (isset($_GET['produto']) && $_GET['produto'] == $p['Cod_produto']) ? 'selected' : '' ?>>
@@ -140,6 +155,7 @@ $result = $stmt->get_result();
         <noscript><button type="submit">Filtrar</button></noscript>
     </form>
 
+    <!-- Tabela de variações -->
     <table border="1" cellpadding="6" cellspacing="0" style="width:100%;background:#fff;">
         <tr>
             <th>Produto</th>
@@ -158,9 +174,10 @@ $result = $stmt->get_result();
                     <td>R$ <?= number_format($row['Preco'], 2, ',', '.') ?></td>
                     <td><?= htmlspecialchars($row['Status']) ?></td>
                     <td>
+                        <!-- Formulário para alternar status da variação -->
                         <form method="get" style="display:inline;">
                             <?php
-                            // Mantém filtros ao alternar status
+                            // Mantém os filtros ao alternar status
                             foreach ($_GET as $k => $v) {
                                 if ($k !== 'toggle') {
                                     if (is_array($v)) {
@@ -174,7 +191,7 @@ $result = $stmt->get_result();
                             }
                             ?>
                             <input type="hidden" name="toggle" value="<?= $row['Cod_variacao'] ?>">
-                            <button type="submit">
+                            <button type="submit" class="btn-disponibilidade">
                                 <?= $row['Status'] === 'disponivel' ? 'Indisponibilizar' : 'Disponibilizar' ?>
                             </button>
                         </form>
@@ -188,6 +205,7 @@ $result = $stmt->get_result();
   </main>
 
   <script>
+    // Script para abrir/fechar o menu lateral
     document.addEventListener('DOMContentLoaded', function() {
       const btnMenu = document.querySelector('.btn-menu');
       const navMenu = document.getElementById('menu');
@@ -205,6 +223,14 @@ $result = $stmt->get_result();
       });
     });
   </script>
+  <script>
+    // Inicializa o Select2 nos selects de filtro
+    $(document).ready(function() {
+      $('select[name="tipo_produto"], select[name="produto"], select[name="disponibilidade"]').select2({
+        width: 'resolve',
+        dropdownParent: $('body')
+      });
+    });
+  </script>
 </body>
-
 </html>

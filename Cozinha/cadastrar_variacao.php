@@ -146,13 +146,14 @@ if ($_SESSION['nivel'] != 1) {
       }
     }
   </script>
-<script>
+
+  <script>
   $(document).ready(function() {
     function initSelect2() {
       $('#produto').select2({
         placeholder: "Selecione ou pesquise um produto",
         dropdownParent: $('.container-cadastro'),
-        width: '100%'
+        width: 'resolve'
       });
     }
 

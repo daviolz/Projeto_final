@@ -75,6 +75,29 @@ $result = $stmt->get_result();
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <style>
+    .selecaofiltro:focus {
+  border: 2px solid #dfdfdf;
+  outline: none;
+  box-shadow: 0 0 5px #B7734433;
+}
+
+.select2-container {
+  width: 220px ; 
+  font-size: 16px;
+}
+.select2-selection {
+  height: 30px !important;
+  border-radius: 5px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.select2-selection__rendered {
+  line-height: 30px !important;
+}
+  </style>
   <link rel="stylesheet" href="CSS/style.css">
   <title>Histórico</title>
 </head>
