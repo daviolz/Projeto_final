@@ -36,8 +36,7 @@
                 foreach ($_SESSION['carrinho'] as &$item) {
                     if ($item['cod_variacao'] == $cod_variacao) {
                         $item['qte'] += $qte; // Atualiza a quantidade
-                        $encontrado = true;
-                        break;
+                        $encontrado = true;                 break;
                     }
                 }
                 if (!$encontrado) {

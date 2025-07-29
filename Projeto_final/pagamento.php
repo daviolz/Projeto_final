@@ -22,21 +22,21 @@ $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
         </div>
         <div class="container">
             <div class="opcoes-pagamento">
-                <form action="" method="post">
+                <form action="php/registrar_pedidos" method="post">
                     <div class="opcao">
-                        <input type="radio" name="pagamento" id="credito" value="1" required>
+                        <input type="radio" name="pagamento" id="credito" value="Crédito" required>
                         <label for="credito"><img src="../img/cartao.png" alt="Cartão de Crédito">Cartão de Crédito</label>
                     </div>
                     <div class="opcao">
-                        <input type="radio" name="pagamento" id="debito" value="2" required>
+                        <input type="radio" name="pagamento" id="debito" value="Débito" required>
                         <label for="debito"><img src="../img/cartao.png" alt="Cartão de Débito">Cartão de Débito</label>
                     </div>
                     <div class="opcao">
-                        <input type="radio" name="pagamento" id="pix" value="3" required>
+                        <input type="radio" name="pagamento" id="pix" value="Pix" required>
                         <label for="pix"><img src="../img/pix.png" alt="Pix">Pix</label>
                     </div>
                     <div class="opcao">
-                        <input type="radio" name="pagamento" id="dinheiro" value="4" required>
+                        <input type="radio" name="pagamento" id="dinheiro" value="Dinheiro" required>
                         <label for="dinheiro"><img src="../img/dinheriro.png" alt="Dinheiro">Dinheiro</label>
                     </div>
                    
@@ -52,9 +52,24 @@ $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
       </div>
         <div class = "baixo">
         <button class='op-btn cancelar' onclick="window.location.href='php/deletar_comanda.php'">Cancelar Pedido</button>
-        <button class='op-btn fazer' onclick="window.location.href='php/carrinho.html'">Fazer pedido</button>
+        <button class='op-btn fazer' id="fazer-pedido-btn">Fazer pedido</button>
         </div>
     </div>
     </footer>
+
+    <script>
+         const FazerPedidoBtn = document.getElementById('fazer-pedido-btn');
+        if (FazerPedidoBtn) {
+            FazerPedidoBtn.addEventListener('click', function() {
+                // Procura o formulário de adicionar produto e envia
+                const form = document.querySelector('.adicionar form');
+                if (form) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
+
+
 </body>
 </html>

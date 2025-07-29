@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS Comanda(
     Valor_total Decimal(10,2) NOT NULL DEFAULT 0.00,
     Senha INT,
     Pagamento ENUM('A pagar', 'paga') NOT NULL DEFAULT 'A pagar',
+    Forma_pagamento ENUM('Dinheiro', 'Crédito', 'Débito', 'Pix'),
     Status ENUM ('esperando', 'preparando', 'pronto' , 'cancelada') NOT NULL DEFAULT 'esperando'
 );
 

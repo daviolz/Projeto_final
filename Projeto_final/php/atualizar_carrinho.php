@@ -22,6 +22,7 @@ foreach ($_SESSION['carrinho'] as &$item) {
         break;
     }
 }
+
 unset($item); // Boa prática ao usar referência em foreach
 // Recalcula o total do carrinho
 $total = 0.0;
