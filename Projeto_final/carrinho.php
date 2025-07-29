@@ -46,14 +46,16 @@ $total = 0.0;
                     <p><?php echo htmlspecialchars($produto['nome_variacao']); ?></p>
                   <?php endif; ?>
               </div>
-              <div class='preco-produto'>
-                <p>R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></h3>
-              </div>
-              <div class="controle-qtd">
-                <span class='qte-menos'>-</span>
-                <input type='number' class='qte-input' name='qte[<?php echo $produto['cod_variacao'] ?>]' value='<?php echo $produto['qte']; ?>' min="1" data-preco="<?php echo $produto['preco']; ?>" />
-                <span class='qte-mais'>+</span>
-              </div>
+        <div class="acoes-produto">
+          <span class="preco-produto">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></span>
+        <div class="controle-qtd">
+          <span class='qte-menos'>-</span>
+          <input type='number' class='qte-input' name='qte[<?php echo $produto['cod_variacao'] ?>]' value='<?php echo $produto['qte']; ?>' min="1" data-preco="<?php echo $produto['preco']; ?>" />
+          <span class='qte-mais'>+</span>
+        </div>
+        <button class="btn-remover-produto" data-cod-variacao="<?php echo $produto['cod_variacao']; ?>" title="Remover este produto">🗑️</button>
+      </div>
+                  
             </div>
           <?php endforeach; ?>
           <div class="total-carrinho">
