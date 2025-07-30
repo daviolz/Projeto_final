@@ -104,9 +104,13 @@ footer .op .baixo .fazer {
   color: white;
 }
 
+footer .op .baixo .fazer:disabled {
+  background-color: rgb(87, 226, 87);
+}
+
 footer .op .baixo .fazer:hover {
   background-color: #4caf50;
-  color: white;
+  cursor: not-allowed;
 }
 
 footer .op .baixo .cancelar {
@@ -338,21 +342,20 @@ body {
 
 /* Tela de pagamento */
 
-.main-pagamento{
+.main-pagamento {
   margin-left: 0;
   flex: 1;
   padding-bottom: 170px;
 }
-.titulo-pagamento{
+.titulo-pagamento {
   text-align: center;
   margin-top: 1em;
 }
-.container{
+.container {
   display: flex;
   justify-content: center;
-
 }
-.opcoes-pagamento{
+.opcoes-pagamento {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -364,14 +367,14 @@ body {
   padding: 5em 3em;
 }
 
-.opcoes-pagamento form{
+.opcoes-pagamento form {
   width: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 3em;
 }
 
-.opcao{
+.opcao {
   background-color: #fff;
   width: 100%;
   border-radius: 10px;
@@ -381,22 +384,59 @@ body {
   padding: 0 0.5em;
 }
 
-.opcao label{
+.opcao label {
   display: flex;
   align-items: center;
   gap: 1.5em;
   width: 100%;
 }
 
-.opcao input[type='radio']{
+.opcao input[type="radio"] {
   display: none;
 }
 
-
-.opcao:has(input[type='radio']:checked) {
-  background: #F4B53E;
+.opcao:has(input[type="radio"]:checked) {
+  background: #f4b53e;
   color: white;
 }
 
+/* Tela de processamento */
 
+.processando-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
+.processando {
+  text-align: center;
+  font: 1em Arial, sans-serif;
+}
+.spinner {
+  border: 0.5em solid #f3f3f3;
+  border-top: 0.5em solid #b77344;
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.check {
+  justify-content: center;
+  margin: 0 auto;
+  display: none;
+}
+
+.check img {
+  width: 10em;
+  height: auto;
+}

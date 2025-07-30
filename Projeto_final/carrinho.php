@@ -2,6 +2,11 @@
 include_once 'php/conexao.php';
 session_start();
 
+if (!isset($_SESSION['cod_comanda'])) {
+  header("Location: index.php");
+  exit();
+}
+
 // Garante que o carrinho existe
 $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
 $total = 0.0;
@@ -15,6 +20,7 @@ $total = 0.0;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/carrinho.css" />
+  <script src="js/inatividade.js"></script>
   <title>Carrinho</title>
 
 </head>
@@ -33,8 +39,8 @@ $total = 0.0;
           <?php foreach ($carrinho as $produto):
             $subtotal = $produto['preco'] * $produto['qte'];
             $total += $subtotal;
-          ?> 
-          
+          ?>
+
             <div class="div-produto-carrinho">
               <img
                 class="imagem-produto-carrinho"
@@ -46,16 +52,16 @@ $total = 0.0;
                     <p><?php echo htmlspecialchars($produto['nome_variacao']); ?></p>
                   <?php endif; ?>
               </div>
-        <div class="acoes-produto">
-          <span class="preco-produto">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></span>
-        <div class="controle-qtd">
-          <span class='qte-menos'>-</span>
-          <input type='number' class='qte-input' name='qte[<?php echo $produto['cod_variacao'] ?>]' value='<?php echo $produto['qte']; ?>' min="1" data-preco="<?php echo $produto['preco']; ?>" />
-          <span class='qte-mais'>+</span>
-        </div>
-        <button class="btn-remover-produto" data-cod-variacao="<?php echo $produto['cod_variacao']; ?>" title="Remover este produto">🗑️</button>
-      </div>
-                  
+              <div class="acoes-produto">
+                <span class="preco-produto">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></span>
+                <div class="controle-qtd">
+                  <span class='qte-menos'>-</span>
+                  <input type='number' class='qte-input' name='qte[<?php echo $produto['cod_variacao'] ?>]' value='<?php echo $produto['qte']; ?>' min="1" data-preco="<?php echo $produto['preco']; ?>" />
+                  <span class='qte-mais'>+</span>
+                </div>
+                <button class="btn-remover-produto" data-cod-variacao="<?php echo $produto['cod_variacao']; ?>" title="Remover este produto">🗑️</button>
+              </div>
+
             </div>
           <?php endforeach; ?>
           <div class="total-carrinho">
@@ -84,70 +90,70 @@ $total = 0.0;
 
 
   <script>
-  // Função para formatar número como moeda BRL
-  function formatarMoeda(valor) {
-    return valor.toLocaleString('pt-BR', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-  }
+    // Função para formatar número como moeda BRL
+    function formatarMoeda(valor) {
+      return valor.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
 
-  
-  
-  // Adiciona eventos de clique para os botões de mais e menos
-  document.querySelectorAll('.div-produto-carrinho').forEach(function(produtoDiv) {
-    // Variaveis dos botões e input
-    const menos = produtoDiv.querySelector('.qte-menos');
-    const mais = produtoDiv.querySelector('.qte-mais');
-    const input = produtoDiv.querySelector('.qte-input');
 
-    // Evento quando apertar o botão "+"
-    mais.addEventListener('click', function() {
-      let valor = parseInt(input.value, 10) || 1; 
-      valor++;
-      input.value = valor;
-      atualizarCarrinhoNoServidor(input);
-    });
 
-    // Evento quando apertar o botão "-"
-    menos.addEventListener('click', function() {
-      let valor = parseInt(input.value, 10) || 1;
-      if (valor > 1) {
-        valor--;
+    // Adiciona eventos de clique para os botões de mais e menos
+    document.querySelectorAll('.div-produto-carrinho').forEach(function(produtoDiv) {
+      // Variaveis dos botões e input
+      const menos = produtoDiv.querySelector('.qte-menos');
+      const mais = produtoDiv.querySelector('.qte-mais');
+      const input = produtoDiv.querySelector('.qte-input');
+
+      // Evento quando apertar o botão "+"
+      mais.addEventListener('click', function() {
+        let valor = parseInt(input.value, 10) || 1;
+        valor++;
         input.value = valor;
         atualizarCarrinhoNoServidor(input);
-      }
-    });
+      });
 
-    // Função AJAX usando jQuery
-  function atualizarCarrinhoNoServidor(input) {
-    const codVariacao = input.name.match(/\d+/)[0];
-    const qte = parseInt(input.value, 10);
-
-    $.ajax({
-      url: 'php/atualizar_carrinho.php',
-      type: 'POST',
-      data: {
-        cod_variacao: codVariacao,
-        qte: qte
-      },
-      dataType: 'json',
-      success: function(response) {
-        if (response && response.success) {
-          document.querySelectorAll('.total-valor, #footer-total').forEach(function(el) {
-            el.textContent = formatarMoeda(response.total);
-          });
-        } else {
-          alert('Erro ao atualizar o carrinho!');
+      // Evento quando apertar o botão "-"
+      menos.addEventListener('click', function() {
+        let valor = parseInt(input.value, 10) || 1;
+        if (valor > 1) {
+          valor--;
+          input.value = valor;
+          atualizarCarrinhoNoServidor(input);
         }
-      },
-      error: function() {
-        alert('Erro ao comunicar com o servidor!');
-      }
-    });
-  }
+      });
 
-  });
+      // Função AJAX usando jQuery
+      function atualizarCarrinhoNoServidor(input) {
+        const codVariacao = input.name.match(/\d+/)[0];
+        const qte = parseInt(input.value, 10);
+
+        $.ajax({
+          url: 'php/atualizar_carrinho.php',
+          type: 'POST',
+          data: {
+            cod_variacao: codVariacao,
+            qte: qte
+          },
+          dataType: 'json',
+          success: function(response) {
+            if (response && response.success) {
+              document.querySelectorAll('.total-valor, #footer-total').forEach(function(el) {
+                el.textContent = formatarMoeda(response.total);
+              });
+            } else {
+              alert('Erro ao atualizar o carrinho!');
+            }
+          },
+          error: function() {
+            alert('Erro ao comunicar com o servidor!');
+          }
+        });
+      }
+
+    });
   </script>
 
 </body>

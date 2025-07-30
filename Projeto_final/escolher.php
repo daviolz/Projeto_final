@@ -1,16 +1,21 @@
 <?php
-    include_once 'php/conexao.php';
-    session_start();
+include_once 'php/conexao.php';
+session_start();
 
-    if (isset($_POST['tipo_produto'])) {
-        $_SESSION['tipo_produto'] = $_POST['tipo_produto'];
-    } elseif (isset($_GET['tipo_produto'])) {
-        $_SESSION['tipo_produto'] = $_GET['tipo_produto'];
-    } else {
-        // Redirecionar para a página inicial se o tipo de produto não estiver definido
-        header("Location: index.php");
-        exit();
-    }
+if (!isset($_SESSION['cod_comanda'])) {
+    header("Location: index.php");
+    exit();
+}
+
+if (isset($_POST['tipo_produto'])) {
+    $_SESSION['tipo_produto'] = $_POST['tipo_produto'];
+} elseif (isset($_GET['tipo_produto'])) {
+    $_SESSION['tipo_produto'] = $_GET['tipo_produto'];
+} else {
+    // Redirecionar para a página inicial se o tipo de produto não estiver definido
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,9 +23,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escolher Salgado</title>
+    <title>Escolher <?php echo $_SESSION['tipo_produto']; ?></title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/escolher-salgado.css">
+    <script src="js/inatividade.js">
+        console.log(window.history);
+    </script>
 </head>
 
 <body>

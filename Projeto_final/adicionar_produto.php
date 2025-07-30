@@ -1,94 +1,101 @@
-?<?php
-    include_once 'php/conexao.php';
-    session_start();
+<?php
+include_once 'php/conexao.php';
+session_start();
 
-    // Inserir produto no carrinho
-    // Inicializa o carrinho se não existir
-    if (!isset($_SESSION['carrinho'])) {
-        $_SESSION['carrinho'] = [];
-        $_SESSION['carrinho_total'] = 0.0;
-    }
+// Se não tiver um código de comanda, redireciona para o index
+if (!isset($_SESSION['cod_comanda'])) {
+    header("Location: index.php");
+    exit();
+}
 
-    // Processa o POST do formulário de adicionar ao carrinho
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['qte'])) {
-        $cod_produto = $_POST['cod_produto'];
-        $nome_produto = $_POST['nome_produto'];
+// Inserir produto no carrinho
+// Inicializa o carrinho se não existir
+if (!isset($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = [];
+    $_SESSION['carrinho_total'] = 0.0;
+}
 
-        // Pega a imagem do produto
-        $query_img = "SELECT Imagem_produto FROM Produto WHERE Cod_produto = '$cod_produto'";
-        $res_img = mysqli_query($conexao, $query_img);
-        $row_img = mysqli_fetch_assoc($res_img);
-        $imagem_produto = $row_img ? $row_img['Imagem_produto'] : '';
+// Processa o POST do formulário de adicionar ao carrinho
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['qte'])) {
+    $cod_produto = $_POST['cod_produto'];
+    $nome_produto = $_POST['nome_produto'];
+
+    // Pega a imagem do produto
+    $query_img = "SELECT Imagem_produto FROM Produto WHERE Cod_produto = '$cod_produto'";
+    $res_img = mysqli_query($conexao, $query_img);
+    $row_img = mysqli_fetch_assoc($res_img);
+    $imagem_produto = $row_img ? $row_img['Imagem_produto'] : '';
 
 
-        // Pega as variações e quantidades
-        $variacoes = $_POST['nome_variacao'];
-        $quantidades = $_POST['qte'];
-        $precos = $_POST['preco_variacao'];
-        $adicionados = false;
+    // Pega as variações e quantidades
+    $variacoes = $_POST['nome_variacao'];
+    $quantidades = $_POST['qte'];
+    $precos = $_POST['preco_variacao'];
+    $adicionados = false;
 
-        // Adiciona cada variação ao carrinho
-        foreach ($variacoes as $cod_variacao => $nome_variacao) {
-            $qte = intval($quantidades[$cod_variacao]);
-            if ($qte > 0) {
-                // Verifica se a variação já está no carrinho
-                $encontrado = false;
-                foreach ($_SESSION['carrinho'] as &$item) {
-                    if ($item['cod_variacao'] == $cod_variacao) {
-                        $item['qte'] += $qte; // Atualiza a quantidade
-                        $encontrado = true;                 break;
-                    }
+    // Adiciona cada variação ao carrinho
+    foreach ($variacoes as $cod_variacao => $nome_variacao) {
+        $qte = intval($quantidades[$cod_variacao]);
+        if ($qte > 0) {
+            // Verifica se a variação já está no carrinho
+            $encontrado = false;
+            foreach ($_SESSION['carrinho'] as &$item) {
+                if ($item['cod_variacao'] == $cod_variacao) {
+                    $item['qte'] += $qte; // Atualiza a quantidade
+                    $encontrado = true;
+                    break;
                 }
-                if (!$encontrado) {
-                    // Adiciona nova variação ao carrinho
-                    $_SESSION['carrinho'][] = [
-                        'cod_produto' => $cod_produto,
-                        'nome_produto' => $nome_produto,
-                        'cod_variacao' => $cod_variacao,
-                        'nome_variacao' => $nome_variacao,
-                        'qte' => $qte,
-                        'preco' => $precos[$cod_variacao],
-                        'imagem_produto' => $imagem_produto
-                    ];
-                }
-                $_SESSION['carrinho_total'] += $precos[$cod_variacao] * $qte;
-                $adicionados = true;
             }
+            if (!$encontrado) {
+                // Adiciona nova variação ao carrinho
+                $_SESSION['carrinho'][] = [
+                    'cod_produto' => $cod_produto,
+                    'nome_produto' => $nome_produto,
+                    'cod_variacao' => $cod_variacao,
+                    'nome_variacao' => $nome_variacao,
+                    'qte' => $qte,
+                    'preco' => $precos[$cod_variacao],
+                    'imagem_produto' => $imagem_produto
+                ];
+            }
+            $_SESSION['carrinho_total'] += $precos[$cod_variacao] * $qte;
+            $adicionados = true;
         }
-
-
-        // Volta para a página de escolha de produtos
-        header("Location: escolher.php?tipo_produto=" . urlencode($_SESSION['tipo_produto']));
-        exit();
     }
 
-    // Recupera dados do produto para exibição
-    if (isset($_POST['cod_produto'])) {
-        $cod_produto = $_POST['cod_produto'];
 
-        // Pega todas as informações do produto 
-        $query = "SELECT * FROM Produto WHERE cod_produto = '$cod_produto'";
-        $resultado = mysqli_query($conexao, $query);
-        if ($resultado) {
-            $produto = mysqli_fetch_assoc($resultado);
-        }
+    // Volta para a página de escolha de produtos
+    header("Location: escolher.php?tipo_produto=" . urlencode($_SESSION['tipo_produto']));
+    exit();
+}
 
-        // Caso a variavel $cod_produto já esteja definida.
-    } elseif (isset($cod_produto)) {
+// Recupera dados do produto para exibição
+if (isset($_POST['cod_produto'])) {
+    $cod_produto = $_POST['cod_produto'];
 
-        // Já definidos pelo POST anterior
-        $query = "SELECT * FROM Produto WHERE cod_produto = '$cod_produto'";
-        $resultado = mysqli_query($conexao, $query);
-        if ($resultado) {
-            $produto = mysqli_fetch_assoc($resultado);
-        }
-
-        // Caso contrário, redireciona para a página inicial
-    } else {
-        header("Location: index.php");
-        exit();
+    // Pega todas as informações do produto 
+    $query = "SELECT * FROM Produto WHERE cod_produto = '$cod_produto'";
+    $resultado = mysqli_query($conexao, $query);
+    if ($resultado) {
+        $produto = mysqli_fetch_assoc($resultado);
     }
-    ?>
+
+    // Caso a variavel $cod_produto já esteja definida.
+} elseif (isset($cod_produto)) {
+
+    // Já definidos pelo POST anterior
+    $query = "SELECT * FROM Produto WHERE cod_produto = '$cod_produto'";
+    $resultado = mysqli_query($conexao, $query);
+    if ($resultado) {
+        $produto = mysqli_fetch_assoc($resultado);
+    }
+
+    // Caso contrário, redireciona para a página inicial
+} else {
+    header("Location: index.php");
+    exit();
+}
+?>
 
 <!-- Código da Página -->
 <!DOCTYPE html>
@@ -99,6 +106,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $produto['Nome_produto']; ?></title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/inatividade.js"></script>
 </head>
 
 <body>
@@ -132,7 +140,7 @@
     </nav>
 
     <!-- Exibição da página -->
-    <main >
+    <main>
         <div class="conteudo-produto">
 
             <div class="produto">

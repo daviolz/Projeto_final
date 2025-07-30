@@ -1,20 +1,24 @@
 <?php
 include_once 'php/conexao.php';
 session_start();
-$carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
-
+if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho']) || !isset($_SESSION['cod_comanda'])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comprar</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pagamento.css">
-    
+
 </head>
+
 <body>
     <main class="main-pagamento">
         <div class="titulo-pagamento">
@@ -22,7 +26,7 @@ $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
         </div>
         <div class="container">
             <div class="opcoes-pagamento">
-                <form action="php/registrar_pedidos" method="post">
+                <form class="pagamento-form" action="php/registrar_pedidos.php" method="post">
                     <div class="opcao">
                         <input type="radio" name="pagamento" id="credito" value="Crédito" required>
                         <label for="credito"><img src="../img/cartao.png" alt="Cartão de Crédito">Cartão de Crédito</label>
@@ -39,30 +43,39 @@ $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
                         <input type="radio" name="pagamento" id="dinheiro" value="Dinheiro" required>
                         <label for="dinheiro"><img src="../img/dinheriro.png" alt="Dinheiro">Dinheiro</label>
                     </div>
-                   
+
                 </form>
             </div>
         </div>
     </main>
     <footer>
-         <img src="../img/Logo.png" alt="logo" class="logo">
-    <div class="op">
-      <div class="total">
-        <h2>Total: R$ <span id="footer-total"><?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></span></h2>
-      </div>
-        <div class = "baixo">
-        <button class='op-btn cancelar' onclick="window.location.href='php/deletar_comanda.php'">Cancelar Pedido</button>
-        <button class='op-btn fazer' id="fazer-pedido-btn">Fazer pedido</button>
+        <img src="../img/Logo.png" alt="logo" class="logo">
+        <div class="op">
+            <div class="total">
+                <h2>Total: R$ <span id="footer-total"><?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></span></h2>
+            </div>
+            <div class="baixo">
+                <button class='op-btn cancelar' onclick="window.location.href='php/deletar_comanda.php'">Cancelar Pedido</button>
+                <button class='op-btn fazer' disabled>Fazer pedido</button>
+            </div>
         </div>
-    </div>
     </footer>
 
     <script>
-         const FazerPedidoBtn = document.getElementById('fazer-pedido-btn');
-        if (FazerPedidoBtn) {
-            FazerPedidoBtn.addEventListener('click', function() {
+        const fazerBtn = document.querySelector('.fazer');
+        const opcoes = document.getElementsByName('pagamento');
+
+        opcoes.forEach(opcao => {
+            opcao.addEventListener('change', () => {
+                fazerBtn.disabled = false;
+            });
+        });
+
+
+        if (fazerBtn) {
+            fazerBtn.addEventListener('click', function() {
                 // Procura o formulário de adicionar produto e envia
-                const form = document.querySelector('.adicionar form');
+                const form = document.querySelector('.pagamento-form');
                 if (form) {
                     form.submit();
                 }
@@ -72,4 +85,5 @@ $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
 
 
 </body>
+
 </html>
