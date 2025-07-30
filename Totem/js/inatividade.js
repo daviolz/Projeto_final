@@ -7,7 +7,7 @@ function inatividade() {
   contador = setTimeout(() => {
     // Vai redirecionar para a página incial depois de 45 seg
     window.location.href = "php/deletar_comanda.php";
-  }, 45000);
+  }, 25000);
 }
 
 // Se clicar em qualquer lugar ou mexer o mouse no documento, vai reiniciar o contador de inatividade

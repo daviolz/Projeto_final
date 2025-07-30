@@ -23,7 +23,7 @@ if ($forma_pagamento === null) {
         $result_comanda = mysqli_query($conexao, $atualizar_comanda);
     }
 
-    $atualizar_comanda = "UPDATE Comanda SET Pagamento = 'paga', Forma_pagamento = '$forma_pagamento' WHERE Cod_comanda = $_SESSION[cod_comanda]";
+    $atualizar_comanda = "UPDATE Comanda SET Pagamento = 'paga', Forma_pagamento = '$forma_pagamento', Status = 'preparando' WHERE Cod_comanda = $_SESSION[cod_comanda]";
     $result_comanda = mysqli_query($conexao, $atualizar_comanda);
     session_destroy();
     header('Location: ../processando.html');
