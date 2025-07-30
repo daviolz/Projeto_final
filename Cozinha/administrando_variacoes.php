@@ -173,7 +173,7 @@ $result = $stmt->get_result();
                     <td><?= htmlspecialchars($row['Nome_variacao']) ?></td>
                     <td>R$ <?= number_format($row['Preco'], 2, ',', '.') ?></td>
                     <td><?= htmlspecialchars($row['Status']) ?></td>
-                    <td>
+                    <td class="acao">
                         <!-- Formulário para alternar status da variação -->
                         <form method="get" style="display:inline;">
                             <?php

@@ -416,6 +416,12 @@ table tbody td {
   border: 1px solid #dfdfdf;
 }
 
+.acao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
 
 
 
@@ -480,17 +486,29 @@ label input[type="date"] {
 }
 
 .btn-disponibilidade {
-  width: 120px;
-  height: 30px;
+  width: 10em;
+  height: 1.7em;
   font-size: 16px;
   background-color: #B77344;
   color: #fff;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  margin-left: 20%;
 }
 
-.tipinho {
-  color: black;
+.acao_atendimento {
+  width: 11em;
+  height: 3em;
+  font-size: 1.0em;
+  background-color: #B77344;
+  color: #fff;
+  border-radius: 1em;
+  border: none;
+}
+
+.div_acao_atendimento {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
