@@ -81,7 +81,7 @@ if ($_SESSION['nivel'] != 1) {
             </div>
             <div class="input-box-cadastro">
                 <label for="tipo">Tipo do produto</label>
-                <select name="tipo" id="tipo">('bebida', 'salgado', 'doce','combo')
+                <select class="tipinho" name="tipo" id="tipo">('bebida', 'salgado', 'doce','combo')
                   <option value="bebida">Bebida</option>
                   <option value="salgado">Salgado</option>
                   <option value="doce">Doce</option>

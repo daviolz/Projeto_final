@@ -69,9 +69,7 @@ include("PHP/protect.php");
         </div>
         
       </div>
-      <div class="home-option">
-            <a href="atualizar_livro">Sair</a>
-          </div>
+      
     </div>
     </div>
 

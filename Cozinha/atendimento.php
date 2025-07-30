@@ -176,7 +176,7 @@ if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
     </div>
     <!-- comandas prontas (Status = 'pronta') -->
     <div class="pedido">
-        <h3>comandas prontas</h3>
+        <h3>Comandas prontas</h3>
         <?php
         $comandasProntas = $mysqli->query("SELECT * FROM comanda WHERE Status = 'pronta'");
         if ($comandasProntas && $comandasProntas->num_rows > 0) {
