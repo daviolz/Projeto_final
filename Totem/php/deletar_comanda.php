@@ -2,6 +2,11 @@
     session_start();
     include_once 'conexao.php';
 
+    if (!isset($_SESSION['cod_comanda'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // Cria uma nova conta
     $sql = "DELETE FROM Comanda WHERE cod_comanda = " . $_SESSION['cod_comanda'];
     if ($conexao->query($sql) === TRUE) {

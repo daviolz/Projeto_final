@@ -1,6 +1,11 @@
 <?php 
 session_start();
 
+if (!isset($_SESSION['cod_comanda'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
 $forma_pagamento = isset($_POST['pagamento']) ? $_POST['pagamento'] : null;
 if ($forma_pagamento === null) {
     header('Location: ../pagamento.php');

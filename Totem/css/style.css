@@ -105,7 +105,13 @@ footer .op .baixo .fazer {
 }
 
 footer .op .baixo .fazer:disabled {
-  background-color: rgb(87, 226, 87);
+  background-color: rgb(169, 169, 169);
+}
+
+footer .op .baixo .fazer:disabled:hover {
+  background-color: rgb(128, 127, 127);
+  color: white;
+  cursor: not-allowed;
 }
 
 footer .op .baixo .fazer:hover {

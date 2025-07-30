@@ -1,3 +1,14 @@
+<?php
+include_once 'php/conexao.php';
+session_start();
+
+if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho']) || !isset($_SESSION['cod_comanda'])) {
+    header("Location: index.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>

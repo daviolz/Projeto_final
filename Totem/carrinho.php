@@ -12,6 +12,8 @@ $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
 $total = 0.0;
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -80,7 +82,11 @@ $total = 0.0;
       </div>
       <div class="baixo">
         <button class="op-btn cancelar" onclick="window.location.href='escolher.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Voltar</button>
-        <button class="op-btn fazer" onclick="window.location.href='pagamento.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Ir para pagamento</button>
+        <button class="op-btn fazer" 
+          onclick="window.location.href='pagamento.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'"
+          <?php if (empty($_SESSION['carrinho'])) echo 'disabled'; ?>>
+          Ir para pagamento
+        </button>
       </div>
     </div>
   </footer>
