@@ -8,12 +8,19 @@
         exit();
     }
 
+    $hoje = date('Y-m-d');
+    $sqlsenha = "SELECT MAX(Senha) as ultima_senha FROM Comanda WHERE DATE(Data_hora) = '$hoje'";
+    $senharescente = $conexao->query($sqlsenha);
+    $rowsenha = $senharescente->fetch_assoc();
+    $novasenha = ($rowsenha['ultima_senha'] ?? 0) + 1;
+    
     // Cria uma nova conta
-    $sql = "INSERT INTO Comanda (Valor_total) VALUES (0.00)";
+    $sql = "INSERT INTO Comanda (Valor_total, Senha) VALUES (0.00, $novasenha)";
     if ($conexao->query($sql) === TRUE) {
         // Recupera o último id inserido
         $cod_comanda = $conexao->insert_id;
         $_SESSION['cod_comanda'] = $cod_comanda;
+        $_SESSION['senha'] = $novasenha; 
         header("Location: ../home.php");
         exit();
     } else {
