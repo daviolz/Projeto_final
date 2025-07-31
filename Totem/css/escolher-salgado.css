@@ -1,14 +1,13 @@
+/* Estilos comuns */
 .div-conteudo {
   margin: 2em;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
 .div-produto {
-  height: 20svh;
+  height: 15rem;
   text-align: center;
-  padding-bottom: 1em;
 }
 
 .div-produto:hover {
@@ -18,7 +17,36 @@
 }
 
 .imagem-produtos {
-  width: 75%;
-  height: 75%;
   object-fit: contain;
+}
+
+/* Estilo para telas menores que 800px */
+@media screen and (max-width: 800px) {
+  .div-conteudo {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .imagem-produtos {
+    width: 75%;
+    height: 75%;
+  }
+}
+
+/* Estilo para telas a partir de 801px */
+@media screen and (min-width: 801px) {
+  .div-conteudo {
+    grid-template-columns: 0.8fr 0.8fr 0.8fr 0.8fr;
+  }
+
+  .div-produto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .imagem-produtos {
+    width: 50%;
+    height: 50%;
+  }
 }

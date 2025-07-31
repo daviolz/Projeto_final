@@ -21,7 +21,7 @@ if (!isset($_SESSION['carrinho'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/inatividade.js"></script>
+    <!-- <script src="js/inatividade.js"></script> -->
 </head>
 
 <body>

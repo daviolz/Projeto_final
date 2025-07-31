@@ -2,6 +2,11 @@
 include_once 'php/conexao.php';
 session_start();
 
+if (!isset($_SESSION['cod_comanda'])) {
+    header("Location: index.php");
+    exit();
+}
+
 
 if (!isset($_SESSION['carrinho'])) {
  $_SESSION['carrinho'] = [];
