@@ -512,3 +512,33 @@ label input[type="date"] {
   align-items: center;
   margin-top: 20px;
 }
+
+/* Filtros do histórico */
+.filtro_comanda {
+  min-width: 6em;
+}
+
+.nome_filtro {
+  font-size: 0.9em;
+  color: #B77344;
+  
+}
+.filtro_produto,
+.filtro_variação {
+  width: 9em;
+  height: 0.7em;
+}
+
+.filtro_data {
+  width: 9.5em;
+}
+
+
+#content2 {
+  width: 100%;
+}
+
+.filtro_tipo_variacao {
+  width: 6em;
+}
+

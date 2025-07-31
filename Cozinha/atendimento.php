@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
         <h3>Comandas sendo preparadas</h3>
         <?php
         require_once("PHP/conexao.php");
-        $comandasPrep = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'preparando'");
+        $comandasPrep = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'preparando' AND DATE(Data_hora) = CURDATE()");
         if ($comandasPrep && $comandasPrep->num_rows > 0) {
             while($comanda = $comandasPrep->fetch_assoc()) {
                 echo "<div class='pedido-item'>";
@@ -176,7 +176,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
                         echo "<li>";
                         echo "Produto: " . htmlspecialchars($pedido['Nome_produto'] ?? '') . " | ";
                         echo "Variação: " . htmlspecialchars($pedido['Nome_variacao'] ?? '') . " | ";
-                        echo "Quantidade: " . ($pedido['Qte'] ?? '') ;
+                        echo "Quantidade: " . ($pedido['Qte'] ?? '') . " | ";
+                        echo "Data/Hora: " . ($pedido['Data_hora'] ?? '');
                         echo "</li>";
                     }
                     echo "</ul></div>";
@@ -202,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
     <div class="pedido">
         <h3>Comandas prontas</h3>
         <?php
-        $comandasProntas = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'pronto'");
+        $comandasProntas = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'pronto' AND DATE(Data_hora) = CURDATE()");
         if ($comandasProntas && $comandasProntas->num_rows > 0) {
             while($comanda = $comandasProntas->fetch_assoc()) {
                 echo "<div class='pedido-item'>";

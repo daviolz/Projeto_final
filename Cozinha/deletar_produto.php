@@ -3,24 +3,7 @@
 include("PHP/protect.php");
 require_once("PHP/conexao.php");
 
-// Troca o status da variação se solicitado via GET (toggle)
-if (isset($_GET['toggle']) && is_numeric($_GET['toggle'])) {
-    $id = intval($_GET['toggle']);
-    // Busca o status atual da variação
-    $res = $mysqli->query("SELECT Status FROM Produto_Variacao WHERE Cod_variacao = $id");
-    if ($res && $row = $res->fetch_assoc()) {
-        // Alterna entre 'disponivel' e 'indisponivel'
-        $novoStatus = ($row['Status'] === 'disponivel') ? 'indisponivel' : 'disponivel';
-        $mysqli->query("UPDATE Produto_Variacao SET Status = '$novoStatus' WHERE Cod_variacao = $id");
-    }
-    // Redireciona para evitar reenvio do formulário e mantém os filtros
-    $url = strtok($_SERVER["REQUEST_URI"],'?');
-    $query = $_GET;
-    unset($query['toggle']);
-    $redirect = $url . (count($query) ? '?' . http_build_query($query) : '');
-    header("Location: $redirect");
-    exit;
-}
+
 
 // Busca todos os tipos de produto para o filtro
 $tipos = [];
@@ -46,12 +29,6 @@ if (!empty($_GET['produto'])) {
     $params[] = $_GET['produto'];
     $tipos_param .= "i";
 }
-// Filtro por disponibilidade (status)
-if (isset($_GET['disponibilidade']) && $_GET['disponibilidade'] !== "") {
-    $filtros[] = "Produto_Variacao.Status = ?";
-    $params[] = $_GET['disponibilidade'];
-    $tipos_param .= "s";
-}
 
 // Monta a cláusula WHERE se houver filtros
 $where = "";
@@ -76,6 +53,27 @@ if ($params) {
 }
 $stmt->execute();
 $result = $stmt->get_result();
+
+// Deletar variação
+if (isset($_GET['delete_variacao']) && is_numeric($_GET['delete_variacao'])) {
+    $id = intval($_GET['delete_variacao']);
+    $mysqli->query("DELETE FROM Produto_Variacao WHERE Cod_variacao = $id");
+    header("Location: deletar_produto.php?" . http_build_query(array_diff_key($_GET, ['delete_variacao'=>1])));
+    exit;
+}
+
+// Deletar produto (só se não houver variações associadas)
+if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
+    $id = intval($_GET['delete_produto']);
+    // Verifica se tem variações
+    $res = $mysqli->query("SELECT COUNT(*) as total FROM Produto_Variacao WHERE Cod_produto = $id");
+    $row = $res->fetch_assoc();
+    if ($row['total'] == 0) {
+        $mysqli->query("DELETE FROM Produto WHERE Cod_produto = $id");
+    }
+    header("Location: deletar_produto.php?" . http_build_query(array_diff_key($_GET, ['delete_produto'=>1])));
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -123,7 +121,7 @@ $result = $stmt->get_result();
     <!-- Formulário de filtros -->
     <form method="get" style="margin-bottom:20px;">
         <label>Tipo do Produto:
-            <select class="filtro_tipo_variacao" name="tipo_produto" onchange="this.form.submit()">
+            <select name="tipo_produto" onchange="this.form.submit()">
                 <option value="">Todos</option>
                 <?php foreach($tipos as $tipo): ?>
                     <option value="<?= htmlspecialchars($tipo) ?>" <?= (isset($_GET['tipo_produto']) && $_GET['tipo_produto'] == $tipo) ? 'selected' : '' ?>>
@@ -174,12 +172,11 @@ $result = $stmt->get_result();
                     <td>R$ <?= number_format($row['Preco'], 2, ',', '.') ?></td>
                     <td><?= htmlspecialchars($row['Status']) ?></td>
                     <td class="acao">
-                        <!-- Formulário para alternar status da variação -->
-                        <form method="get" style="display:inline;">
+                        <!-- Botão para deletar variação -->
+                        <form method="get" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar esta variação?');">
                             <?php
-                            // Mantém os filtros ao alternar status
                             foreach ($_GET as $k => $v) {
-                                if ($k !== 'toggle') {
+                                if ($k !== 'delete_variacao' && $k !== 'delete_produto') {
                                     if (is_array($v)) {
                                         foreach ($v as $vv) {
                                             echo '<input type="hidden" name="'.htmlspecialchars($k).'[]" value="'.htmlspecialchars($vv).'">';
@@ -190,11 +187,35 @@ $result = $stmt->get_result();
                                 }
                             }
                             ?>
-                            <input type="hidden" name="toggle" value="<?= $row['Cod_variacao'] ?>">
-                            <button type="submit" class="btn-disponibilidade">
-                                <?= $row['Status'] === 'disponivel' ? 'Indisponibilizar' : 'Disponibilizar' ?>
-                            </button>
+                            <input type="hidden" name="delete_variacao" value="<?= $row['Cod_variacao'] ?>">
+                            <button type="submit" class="btn-delete" style="color:red;">Deletar Variação</button>
                         </form>
+                        <!-- Botão para deletar produto (só mostra se não houver outras variações) -->
+                        <?php
+                        // Verifica se é a única variação do produto
+                        $cod_produto = intval($row['Cod_produto']);
+                        $resVar = $mysqli->query("SELECT COUNT(*) as total FROM Produto_Variacao WHERE Cod_produto = $cod_produto");
+                        $rowVar = $resVar->fetch_assoc();
+                        if ($rowVar['total'] == 1) {
+                        ?>
+                        <form method="get" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este produto?');">
+                            <?php
+                            foreach ($_GET as $k => $v) {
+                                if ($k !== 'delete_variacao' && $k !== 'delete_produto') {
+                                    if (is_array($v)) {
+                                        foreach ($v as $vv) {
+                                            echo '<input type="hidden" name="'.htmlspecialchars($k).'[]" value="'.htmlspecialchars($vv).'">';
+                                        }
+                                    } else {
+                                        echo '<input type="hidden" name="'.htmlspecialchars($k).'" value="'.htmlspecialchars($v).'">';
+                                    }
+                                }
+                            }
+                            ?>
+                            <input type="hidden" name="delete_produto" value="<?= $row['Cod_produto'] ?>">
+                            <button type="submit" class="btn-delete" style="color:darkred;">Deletar Produto</button>
+                        </form>
+                        <?php } ?>
                     </td>
                 </tr>
             <?php endwhile; ?>
@@ -226,7 +247,7 @@ $result = $stmt->get_result();
   <script>
     // Inicializa o Select2 nos selects de filtro
     $(document).ready(function() {
-      $('select[name="tipo_produto"], select[name="produto"], select[name="disponibilidade"]').select2({
+      $('select[name="tipo_produto"], select[name="produto"]').select2({
         width: 'resolve',
         dropdownParent: $('body')
       });
