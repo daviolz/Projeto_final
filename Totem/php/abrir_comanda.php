@@ -17,7 +17,7 @@
     // Cria uma nova conta
     $sql = "INSERT INTO Comanda (Valor_total, Senha) VALUES (0.00, $novasenha)";
     if ($conexao->query($sql) === TRUE) {
-        // Recupera o último id inserido
+        // Recupera os últimos id e senha inseridos
         $cod_comanda = $conexao->insert_id;
         $_SESSION['cod_comanda'] = $cod_comanda;
         $_SESSION['senha'] = $novasenha; 

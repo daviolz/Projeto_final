@@ -124,11 +124,11 @@ $result = $stmt->get_result();
 
     <a href="PHP/Logout.php">Sair</a>
   </nav>
-  <main id="content">
+  <main id="content2">
     <h2>Histórico de Pedidos</h2>
-    <form method="get" style="margin-bottom:20px;">
-        <label>Comanda:
-            <select name="comanda">
+    <form class="form_filtro" method="get" style="margin-bottom:20px;">
+        <label class="nome_filtro">Comanda:
+            <select class="filtro_comanda" name="comanda">
                 <option value="">Todas</option>
                 <?php while($c = $comandas->fetch_assoc()): ?>
                     <option value="<?= $c['Cod_comanda'] ?>" <?= (isset($_GET['comanda']) && $_GET['comanda'] == $c['Cod_comanda']) ? 'selected' : '' ?>>
@@ -137,8 +137,8 @@ $result = $stmt->get_result();
                 <?php endwhile; ?>
             </select>
         </label>
-        <label>Produto:
-            <select name="produto">
+        <label class="nome_filtro">Produto:
+            <select class="filtro_produto" name="produto">
                 <option value="">Todos</option>
                 <?php while($p = $produtos->fetch_assoc()): ?>
                     <option value="<?= $p['Cod_produto'] ?>" <?= (isset($_GET['produto']) && $_GET['produto'] == $p['Cod_produto']) ? 'selected' : '' ?>>
@@ -147,8 +147,8 @@ $result = $stmt->get_result();
                 <?php endwhile; ?>
             </select>
         </label>
-        <label>Variação:
-            <select name="variacao">
+        <label class="nome_filtro">Variação:
+            <select class="filtro_variação" name="variacao">
                 <option value="">Todas</option>
                 <?php while($v = $variacoes->fetch_assoc()): ?>
                     <option value="<?= $v['Cod_variacao'] ?>" <?= (isset($_GET['variacao']) && $_GET['variacao'] == $v['Cod_variacao']) ? 'selected' : '' ?>>
@@ -157,8 +157,8 @@ $result = $stmt->get_result();
                 <?php endwhile; ?>
             </select>
         </label>
-        <label>Data:
-            <input type="date" name="data" value="<?= isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '' ?>">
+        <label class="nome_filtro">Data:
+            <input class="filtro_data" type="date" name="data" value="<?= isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '' ?>">
         </label>
         <button type="submit" class="btn-filtro">Filtrar</button>
         <a href="historico.php" class="btn-limpar">Limpar filtros</a>
