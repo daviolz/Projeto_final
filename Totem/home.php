@@ -2,6 +2,11 @@
 include_once 'php/conexao.php';
 session_start();
 
+if (!isset($_SESSION['cod_comanda'])) {
+    header("Location: index.php");
+    exit();
+}
+
 // Inicializa o carrinho se não existir
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = []; // array de itens: cada item é ['cod_variacao'=>..., 'qte'=>..., 'preco'=>...]

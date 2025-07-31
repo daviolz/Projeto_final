@@ -1,10 +1,16 @@
 <?php
 include_once 'php/conexao.php';
 session_start();
-if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho']) || !isset($_SESSION['cod_comanda'])) {
+if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+    header("Location: carrinho.php");
+    exit();
+}
+
+if (!isset($_SESSION['cod_comanda'])) {
     header("Location: index.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +27,10 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho']) || !isset($_SE
 
 <body>
     <main class="main-pagamento">
+        <div class="voltar">
+            <a href=".php"></a>
+        </div>
+
         <div class="titulo-pagamento">
             <h2>Pagamento</h2>
         </div>

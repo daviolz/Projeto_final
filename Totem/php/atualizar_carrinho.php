@@ -2,6 +2,11 @@
 session_start();
 header('Content-Type: application/json');
 
+if (!isset($_SESSION['cod_comanda'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
 // Garante que o carrinho existe
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
