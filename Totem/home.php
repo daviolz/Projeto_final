@@ -22,6 +22,7 @@ if (!isset($_SESSION['carrinho'])) {
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/inatividade.js"></script>
+    <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
 </head>
 
 <body>

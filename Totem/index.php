@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
     <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
        <style>
         body{

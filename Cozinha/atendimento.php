@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
   <meta charset="UTF-8">
   <meta http-equiv="refresh" content="10">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="CSS/style.css">
   <title>Registrar Atendimento</title>
