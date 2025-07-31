@@ -26,7 +26,9 @@ if (isset($_POST['tipo_produto'])) {
     <title>Escolher <?php echo $_SESSION['tipo_produto']; ?></title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/escolher-salgado.css">
-    <!-- <script src="js/inatividade.js"> -->
+    <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+    <script src="js/inatividade.js">
+        console.log(window.history);
     </script>
 </head>
 

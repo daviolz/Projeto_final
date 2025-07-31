@@ -54,6 +54,7 @@ if (isset($_POST['login']) && strlen($_POST['login']) > 0) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
   <title>Login</title>
   <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css" />

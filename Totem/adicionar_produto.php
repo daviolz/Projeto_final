@@ -106,7 +106,8 @@ if (isset($_POST['cod_produto'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $produto['Nome_produto']; ?></title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- <script src="js/inatividade.js"></script> -->
+    <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+    <script src="js/inatividade.js"></script>
 </head>
 
 <body>

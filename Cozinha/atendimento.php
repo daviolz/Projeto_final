@@ -7,13 +7,30 @@ if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
   exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda'])) {
+    $id = intval($_POST['id_comanda']);
+    $mysqli->query("UPDATE Comanda SET Status = 'pronto' WHERE Cod_comanda = $id");
+    header("Location: atendimento.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])) {
+    $id = intval($_POST['id_comanda_entrega']);
+    $mysqli->query("UPDATE Comanda SET Status = 'entregue' WHERE Cod_comanda = $id");
+    header("Location: atendimento.php");
+    exit;
+}
+
+
 
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="10">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="CSS/style.css">
   <title>Registrar Atendimento</title>
@@ -139,7 +156,7 @@ if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
         <h3>Comandas sendo preparadas</h3>
         <?php
         require_once("PHP/conexao.php");
-        $comandasPrep = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'preparando'");
+        $comandasPrep = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'preparando' AND DATE(Data_hora) = CURDATE()");
         if ($comandasPrep && $comandasPrep->num_rows > 0) {
             while($comanda = $comandasPrep->fetch_assoc()) {
                 echo "<div class='pedido-item'>";
@@ -160,10 +177,19 @@ if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
                         echo "<li>";
                         echo "Produto: " . htmlspecialchars($pedido['Nome_produto'] ?? '') . " | ";
                         echo "Variação: " . htmlspecialchars($pedido['Nome_variacao'] ?? '') . " | ";
-                        echo "Quantidade: " . ($pedido['Qte'] ?? '') ;
+                        echo "Quantidade: " . ($pedido['Qte'] ?? '') . " | ";
+                        echo "Data/Hora: " . ($pedido['Data_hora'] ?? '');
                         echo "</li>";
                     }
                     echo "</ul></div>";
+                    echo "<p><strong>Ação:</strong></p>";
+                    echo "<div class= 'div_acao_atendimento'>
+                          <form method='post' action=''>
+                          <input type='hidden' name='id_comanda' value='{$comanda['Cod_comanda']}'>
+                          <button class='acao_atendimento' type='submit'>Marcar como Pronta</button>
+                          </form>
+                          </div>";
+                    
                 } else {
                     echo "<div style='margin-top:10px;'>Nenhum pedido para esta comanda.</div>";
                 }
@@ -178,7 +204,7 @@ if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
     <div class="pedido">
         <h3>Comandas prontas</h3>
         <?php
-        $comandasProntas = $mysqli->query("SELECT * FROM comanda WHERE Status = 'pronta'");
+        $comandasProntas = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'pronto' AND DATE(Data_hora) = CURDATE()");
         if ($comandasProntas && $comandasProntas->num_rows > 0) {
             while($comanda = $comandasProntas->fetch_assoc()) {
                 echo "<div class='pedido-item'>";
@@ -204,6 +230,13 @@ if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
                         echo "</li>";
                     }
                     echo "</ul></div>";
+                    echo "<p><strong>Ação:</strong></p>";
+                    echo "<div class= 'div_acao_atendimento'>
+                          <form method='post' action=''>
+                          <input type='hidden' name='id_comanda_entrega' value='{$comanda['Cod_comanda']}'>
+                          <button class='acao_atendimento' type='submit'>Marcar como Entregue</button>
+                          </form>
+                          </div>";
                 } else {
                     echo "<div style='margin-top:10px;'>Nenhum pedido para esta comanda.</div>";
                 }

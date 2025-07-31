@@ -22,6 +22,7 @@ if (!isset($_SESSION['cod_comanda'])) {
     <title>Comprar</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pagamento.css">
+    <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
 
 </head>
 
