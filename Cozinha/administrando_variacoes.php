@@ -76,7 +76,29 @@ if ($params) {
 }
 $stmt->execute();
 $result = $stmt->get_result();
+
+// Deletar variação
+if (isset($_GET['delete_variacao']) && is_numeric($_GET['delete_variacao'])) {
+    $id = intval($_GET['delete_variacao']);
+    $mysqli->query("DELETE FROM Produto_Variacao WHERE Cod_variacao = $id");
+    header("Location: administando_variacoes.php?" . http_build_query(array_diff_key($_GET, ['delete_variacao'=>1])));
+    exit;
+}
+
+// Deletar produto (só se não houver variações associadas)
+if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
+    $id = intval($_GET['delete_produto']);
+    // Verifica se tem variações
+    $res = $mysqli->query("SELECT COUNT(*) as total FROM Produto_Variacao WHERE Cod_produto = $id");
+    $row = $res->fetch_assoc();
+    if ($row['total'] == 0) {
+        $mysqli->query("DELETE FROM Produto WHERE Cod_produto = $id");
+    }
+    header("Location: administando_variacoes.php?" . http_build_query(array_diff_key($_GET, ['delete_produto'=>1])));
+    exit;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -164,7 +186,8 @@ $result = $stmt->get_result();
             <th>Variação</th>
             <th>Preço</th>
             <th>Status</th>
-            <th>Ação</th>
+            <th>Ações</th>
+            
         </tr>
         <?php if($result && $result->num_rows > 0): ?>
             <?php while($row = $result->fetch_assoc()): ?>
@@ -197,6 +220,55 @@ $result = $stmt->get_result();
                             </button>
                         </form>
                     </td>
+                    <td class="acao">
+                        <!-- Botão para deletar variação -->
+                        <form method="get" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar esta variação?');">
+                            <?php
+                            foreach ($_GET as $k => $v) {
+                                if ($k !== 'delete_variacao' && $k !== 'delete_produto') {
+                                    if (is_array($v)) {
+                                        foreach ($v as $vv) {
+                                            echo '<input type="hidden" name="'.htmlspecialchars($k).'[]" value="'.htmlspecialchars($vv).'">';
+                                        }
+                                    } else {
+                                        echo '<input type="hidden" name="'.htmlspecialchars($k).'" value="'.htmlspecialchars($v).'">';
+                                    }
+                                }
+                            }
+                            ?>
+                            <input type="hidden" name="delete_variacao" value="<?= $row['Cod_variacao'] ?>">
+                            <button type="submit" class="btn-disponibilidade">Deletar Variação</button>
+                        </form>
+                        <!-- Botão para deletar produto (só mostra se não houver outras variações) -->
+                         </td>
+                        
+                        <?php
+                        // Verifica se é a única variação do produto
+                        $cod_produto = intval($row['Cod_produto']);
+                        $resVar = $mysqli->query("SELECT COUNT(*) as total FROM Produto_Variacao WHERE Cod_produto = $cod_produto");
+                        $rowVar = $resVar->fetch_assoc();
+                        if ($rowVar['total'] == 1) {
+                        ?>
+                        <td class="acao">
+                        <form method="get" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este produto?');">
+                            <?php
+                            foreach ($_GET as $k => $v) {
+                                if ($k !== 'delete_variacao' && $k !== 'delete_produto') {
+                                    if (is_array($v)) {
+                                        foreach ($v as $vv) {
+                                            echo '<input type="hidden" name="'.htmlspecialchars($k).'[]" value="'.htmlspecialchars($vv).'">';
+                                        }
+                                    } else {
+                                        echo '<input type="hidden" name="'.htmlspecialchars($k).'" value="'.htmlspecialchars($v).'">';
+                                    }
+                                }
+                            }
+                            ?>
+                            <input type="hidden" name="delete_produto" value="<?= $row['Cod_produto'] ?>">
+                            <button type="submit" class="btn-disponibilidade">Deletar Produto</button>
+                        </form>
+                        </td>
+                        <?php }?>
                 </tr>
             <?php endwhile; ?>
         <?php else: ?>
