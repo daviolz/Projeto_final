@@ -2,7 +2,7 @@
 .div-conteudo {
   margin: 2em;
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .div-produto {
@@ -14,6 +14,7 @@
   border-radius: 20px;
   outline-style: solid;
   outline-color: rgb(227, 227, 227);
+  cursor: pointer;
 }
 
 .imagem-produtos {
@@ -35,7 +36,11 @@
 /* Estilo para telas a partir de 801px */
 @media screen and (min-width: 801px) {
   .div-conteudo {
-    grid-template-columns: 0.8fr 0.8fr 0.8fr 0.8fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  br {
+    display: none;
   }
 
   .div-produto {
@@ -43,6 +48,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 10rem;
   }
 
   .imagem-produtos {

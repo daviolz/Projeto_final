@@ -27,9 +27,7 @@ if (isset($_POST['tipo_produto'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/escolher-salgado.css">
     <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
-    <script src="js/inatividade.js">
-        console.log(window.history);
-    </script>
+    <!-- <script src="js/inatividade.js"></script> -->
 </head>
 
 <body>
@@ -60,7 +58,6 @@ if (isset($_POST['tipo_produto'])) {
         </form>
     </nav>
     <main>
-        <br>
         <div class="div-conteudo">
             <?php
             $sql = "SELECT p.*, MIN(v.Preco) as Preco_min 

@@ -106,8 +106,9 @@ if (isset($_POST['cod_produto'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $produto['Nome_produto']; ?></title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/carrinho.css">
     <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
-    <script src="js/inatividade.js"></script>
+    <!-- <script src="js/inatividade.js"></script> -->
 </head>
 
 <body>
@@ -193,10 +194,10 @@ if (isset($_POST['cod_produto'])) {
 
                     echo "<div class='opcao-produto-unica'>";
 
-                    echo "<div class='qte'>";
-                    echo "<span class='qte-menos'>-</span>";
-                    echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='01' min='0' required>";
-                    echo "<span class='qte-mais'>+</span>";
+                    echo "<div class='controle-qtd'>";
+                    echo "<button type='button' class='qte-menos'>-</button>";
+                    echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='1' min='0' required>";
+                    echo "<button type='button' class='qte-mais'>+</button>";
                     echo "</div>";
                     echo "</div>";
                     echo "</form>";
@@ -230,10 +231,10 @@ if (isset($_POST['cod_produto'])) {
                         $valor = $primeiro ? 1 : 0;
                         echo "<div class='opcao-produto'>";
                         echo "<div class='nome-opcao'><span>$nome_variacao</span><br><span>R$ " . number_format($preco_variacao, 2, ',', '.') . "</span></div>";
-                        echo "<div class='qte'>";
-                        echo "<span class='qte-menos'>-</span>";
-                        echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='" . str_pad($valor, 2, '0', STR_PAD_LEFT) . "' min='0' required>";
-                        echo "<span class='qte-mais'>+</span>";
+                        echo "<div class='controle-qtd'>";
+                        echo "<button type='button' class='qte-menos'>-</button>";
+                        echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='" . $valor . "' min='0' required>";
+                        echo "<button type='button' class='qte-mais'>+</button>";
                         echo "</div>";
                         echo "<input type='hidden' name='nome_variacao[$cod_variacao]' value='" . htmlspecialchars($nome_variacao, ENT_QUOTES) . "'>";
                         echo "<input type='hidden' name='preco_variacao[$cod_variacao]' value='" . $preco_variacao . "'>";
@@ -273,14 +274,14 @@ if (isset($_POST['cod_produto'])) {
             mais.addEventListener('click', function() {
                 let valor = parseInt(input.value, 10);
                 valor++;
-                input.value = valor < 10 ? '0' + valor : valor;
+                input.value = valor;
             });
 
             menos.addEventListener('click', function() {
                 let valor = parseInt(input.value, 10);
                 if (valor > 0) {
                     valor--;
-                    input.value = valor < 10 ? '0' + valor : valor;
+                    input.value = valor;
                 }
             });
         });

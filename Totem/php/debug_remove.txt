@@ -1,0 +1,52 @@
+POST: Array
+(
+    [cod_variacao] => 3
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 2
+            [nome_produto] => Coxinha
+            [cod_variacao] => 3
+            [nome_variacao] => Coxinha de Frango
+            [qte] => 6
+            [preco] => 6.50
+            [imagem_produto] => img/coxinha.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 3
+            [nome_produto] => Hamburguer
+            [cod_variacao] => 8
+            [nome_variacao] => Hamburguer Assado
+            [qte] => 1
+            [preco] => 10.00
+            [imagem_produto] => img/hamburguer.png
+        )
+
+)
+SESSION depois: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 3
+            [nome_produto] => Hamburguer
+            [cod_variacao] => 8
+            [nome_variacao] => Hamburguer Assado
+            [qte] => 1
+            [preco] => 10.00
+            [imagem_produto] => img/hamburguer.png
+        )
+
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 10
+    [total_formatado] => 10,00
+    [message] => Item removido com sucesso
+)

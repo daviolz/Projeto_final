@@ -1,94 +1,79 @@
+/* Tela de pagamento */
 
-.pedido {
-  background-color: #B77344;
-  margin: 10px;
-  border: 2px solid #6f4528;
-  width: 70%;
-  border-radius: 10px;
-  height: auto;
+.main-pagamento {
+  margin-left: 0;
+  flex: 1;
 }
 
-.pedido h1 {
-  color: white;
+.titulo-pagamento {
   text-align: center;
-  font-weight: 200;
+  margin-top: 1em;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+.opcoes-pagamento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
+  gap: 5em;
+  background-color: #a65f2b;
+  width: 80%;
+  border-radius: 10px;
+  padding: 5em 3em;
 }
 
-.input-container {
+.opcoes-pagamento form {
   width: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
- 
-  margin: 60px 0;
+  gap: 3em;
 }
 
-main h2{
-    margin-top: 30px;
-    margin-bottom: 20px;
-    font-size: 25px;
-    text-align: center;
-    position: relative;
+.opcao {
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  padding: 0 0.5em;
 }
 
-.pagamento-opcao {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border: 2px solid #5b381f;
-    border-radius: 8px;
-    padding: 8px 12px 8px 12px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    transition: border 0.2s, background 0.2s;
-    background: #fffffe;
+.opcao label {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  width: 100%;
 }
 
-.pagamento-opcao img {
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    transition: transform 0.2s;
+.opcao input[type="radio"] {
+  display: none;
 }
 
-.pagamento-opcao input[type="radio"] {
-    display: none;
+.opcao:has(input[type="radio"]:checked) {
+  background: #f4b53e;
+  color: white;
 }
 
-.pagamento-opcao:hover {
-    border: 2px solid #6f4528;
-    background: #F4B53E;
-}
+@media screen and (min-width: 801px) {
+  .opcoes-pagamento {
+    width: 60%;
+    padding: 3em 2em;
+  }
 
-.pagamento-opcao input[type="radio"]:checked + img,
-.pagamento-opcao input[type="radio"]:checked ~ span {
-    filter: brightness(1.2);
-}
+  .opcoes-pagamento form {
+    grid-template-rows: auto;
+    gap: 1.5em;
+  }
 
+  .opcao {
+    font-size: 1em;
+  }
 
-.pagamento-opcao input[type="radio"]:checked ~ span {
-    font-weight: bolder;  
-    color: rgb(255, 255, 255);
-    padding:10px;
-    
-}
-
-
-.button_atualiza {
-    border: 2px solid #633f25;
-    border-radius: 4em;
-    color: #B77344;
-    font-weight: bold;  
-    background-color: white;
+  .opcao label img {
+    width: 3em;
     height: 3em;
-    cursor: pointer;
-    padding: 0 1em;
-    
-}
-
-.botaopag {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 13px;
+  }
 }

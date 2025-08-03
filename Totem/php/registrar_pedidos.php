@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 if (!isset($_SESSION['cod_comanda'])) {
@@ -11,8 +11,7 @@ if ($forma_pagamento === null) {
     header('Location: ../pagamento.php');
     echo "<script>alert('Selecione uma forma de pagamento.');</script>";
     exit;
-
-}else{
+} else {
     foreach ($_SESSION['carrinho'] as $item) {
         $cod_variacao = $item['cod_variacao'];
         $qte = $item['qte'];
@@ -30,6 +29,5 @@ if ($forma_pagamento === null) {
 
     $atualizar_comanda = "UPDATE Comanda SET Pagamento = 'paga', Forma_pagamento = '$forma_pagamento', Status = 'preparando' WHERE Cod_comanda = $_SESSION[cod_comanda]";
     $result_comanda = mysqli_query($conexao, $atualizar_comanda);
-    session_destroy();
     header('Location: ../processando.php');
 }
