@@ -128,8 +128,82 @@ footer .op .baixo .op-btn {
   text-align: center;
 }
 
+@media screen and (max-width: 450px){
+  nav{
+    position: fixed;
+    width: 6rem;
+    height: 100vh;
+    height: 100svh;
+    border-right: 2px solid #b77344;
+    top: 0;
+  }
+
+  nav ul li{
+    margin: 2.5em 0;
+  }
+
+  .btn-nav{
+    font-size: 1em;
+  }
+
+  nav img{
+    width: 80px;
+    height: 80px;
+  }
+
+  main {
+    margin-left: 6rem;
+    padding-bottom: 170px;
+  }
+
+  footer .logo {
+    width: 60px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    margin-left: 2em;
+    margin-right: 3.5em;
+  }
+
+  footer {
+    width: 100%;
+    height: 10em;
+    bottom: 0%;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  footer .op {
+    width: 100%;
+    left: 100%;
+    margin-right: 2em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer .op .total {
+    text-align: end;
+  }
+
+  footer .op .total h2 {
+    margin-right: 0.5em;
+  }
+
+  footer .op .baixo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
+  }
+
+  footer .op .baixo .op-btn {
+    padding: 0.7em 0.5em;
+    font-size: 1em;
+  }
+
+}
+
 /* Estilização para tablet */
-@media screen and (max-width: 800px) {
+@media screen and (min-width: 500px) {
 
   .modal-conteudo{
     font-size: 1.5em;
