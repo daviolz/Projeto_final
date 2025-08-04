@@ -50,3 +50,63 @@ Resposta: Array
     [total_formatado] => 10,00
     [message] => Item removido com sucesso
 )
+POST: Array
+(
+    [cod_variacao] => 1
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 1
+            [nome_produto] => Pastel
+            [cod_variacao] => 1
+            [nome_variacao] => Pastel de Carne
+            [qte] => 1
+            [preco] => 3.50
+            [imagem_produto] => img/pastel.png
+        )
+
+)
+SESSION depois: Array
+(
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 0
+    [total_formatado] => 0,00
+    [message] => Item removido com sucesso
+)
+POST: Array
+(
+    [cod_variacao] => 63
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 25
+            [nome_produto] => Combo Esfirrado
+            [cod_variacao] => 63
+            [nome_variacao] => Combo Esfirrado Completo
+            [qte] => 1
+            [preco] => 13.50
+            [imagem_produto] => img/combo_esfirrado.png
+        )
+
+)
+SESSION depois: Array
+(
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 0
+    [total_formatado] => 0,00
+    [message] => Item removido com sucesso
+)

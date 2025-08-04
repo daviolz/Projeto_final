@@ -101,6 +101,16 @@ $_SESSION['carrinho_total'] = $total;
     </div>
   </footer>
 
+  <div id="modal-confirmar-remocao" class="modal-remocao">
+    <div class="modal-conteudo">
+      <h2>Remover produto</h2>
+      <p>Tem certeza de que deseja remover este produto do carrinho?</p>
+      <div class="modal-botoes">
+        <button id="btn-cancelar-remocao" class="btn-cancelar">Cancelar</button>
+        <button id="btn-confirmar-remocao" class="btn-confirmar">Remover</button>
+      </div>
+    </div>
+</div>
 
   <!-- Script para utilizar o jquery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -180,31 +190,39 @@ $_SESSION['carrinho_total'] = $total;
     });
 
 
-    $(document).on('click', '.btn-remover-produto', function(e) {
-      e.preventDefault();
-      const codVariacao = $(this).data('cod-variacao');
-      const produtoDiv = $(this).closest('.div-produto-carrinho');
+    let codVariacaoSelecionado = null;
+    let produtoParaRemover = null;
 
+    $(document).on('click', '.btn-remover-produto', function (e) {
+      e.preventDefault();
+      codVariacaoSelecionado = $(this).data('cod-variacao');
+      produtoParaRemover = $(this).closest('.div-produto-carrinho');
+      $('#modal-confirmar-remocao').fadeIn();
+    });
+
+    // Botão "Cancelar"
+    $('#btn-cancelar-remocao').on('click', function () {
+      $('#modal-confirmar-remocao').fadeOut();
+      codVariacaoSelecionado = null;
+      produtoParaRemover = null;
+    });
+
+    // Botão "Confirmar"
+    $('#btn-confirmar-remocao').on('click', function () {
+      if (!codVariacaoSelecionado) return;
 
       $.ajax({
         url: 'php/apagar_produto.php',
         type: 'POST',
         data: {
-          cod_variacao: codVariacao
+          cod_variacao: codVariacaoSelecionado
         },
         dataType: 'json',
-        success: function(response) {
-          console.log('Resposta do servidor:', response); // Debug
-
+        success: function (response) {
           if (response.success) {
-            // Atualiza totais
             $('.total-valor, #footer-total').text(response.total_formatado);
-
-            // Remove visualmente o produto
-            produtoDiv.fadeOut(300, function() {
+            produtoParaRemover.fadeOut(300, function () {
               $(this).remove();
-
-              // Verifica se carrinho está vazio
               if ($('.div-produto-carrinho').length === 0) {
                 $('.div-carrinho').html("<p style='text-align: center;'>Seu carrinho está vazio.</p>");
               }
@@ -213,12 +231,17 @@ $_SESSION['carrinho_total'] = $total;
             alert(response.message || 'Erro ao remover o produto');
           }
         },
-        error: function(xhr, status, error) {
-          console.error("Erro na requisição:", status, error);
+        error: function () {
           alert('Erro na comunicação com o servidor');
+        },
+        complete: function () {
+          $('#modal-confirmar-remocao').fadeOut();
+          codVariacaoSelecionado = null;
+          produtoParaRemover = null;
         }
       });
     });
+
   </script>
 
 

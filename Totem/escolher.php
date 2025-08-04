@@ -97,11 +97,40 @@ if (isset($_POST['tipo_produto'])) {
                 <h2>Total: R$ <?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></h2>
             </div>
             <div class="baixo">
-                <button class='op-btn cancelar' onclick="window.location.href='php/deletar_comanda.php'">Cancelar Pedido</button>
+                <button class='op-btn cancelar' onclick="abrirModalCancelar()">Cancelar Pedido</button>
                 <button class='op-btn fazer' onclick="window.location.href='carrinho.php'">Carrinho</button>
             </div>
         </div>
     </footer>
+
+    <div id="modal-cancelar-pedido" class="modal-remocao">
+    <div class="modal-conteudo">
+        <h2>Cancelar Pedido</h2>
+        <p>Deseja realmente cancelar o pedido?</p>
+        <div class="modal-botoes">
+        <button id="btn-nao-cancelar" class="btn-cancelar">Não</button>
+        <button id="btn-sim-cancelar" class="btn-confirmar">Sim</button>
+        </div>
+    </div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+  function abrirModalCancelar() {
+    $('#modal-cancelar-pedido').fadeIn();
+  }
+
+  $('#btn-nao-cancelar').on('click', function () {
+    $('#modal-cancelar-pedido').fadeOut();
+  });
+
+  $('#btn-sim-cancelar').on('click', function () {
+    window.location.href = 'php/deletar_comanda.php';
+  });
+</script>
+
 </body>
 
 </html>
