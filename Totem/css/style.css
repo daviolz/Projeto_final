@@ -130,6 +130,14 @@ footer .op .baixo .op-btn {
 
 /* Estilização para tablet */
 @media screen and (max-width: 800px) {
+
+  .modal-conteudo{
+    font-size: 1.5em;
+    margin: 45% auto;
+    max-width: 600px;
+  }
+
+
   nav {
     position: fixed;
     width: 12.5rem;
@@ -211,6 +219,11 @@ footer .op .baixo .op-btn {
 
 /* Estilização para desktop */
 @media screen and (min-width: 801px) {
+
+  .modal-conteudo{
+    margin: 15% auto;
+  }
+
   nav {
     position: fixed;
     top: 0;
@@ -427,4 +440,61 @@ footer .op .baixo .op-btn {
 .check img {
   width: 5em;
   height: 5em;
+}
+
+
+.modal-remocao {
+  display: none; /* escondido por padrão */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); /* fundo escuro */
+}
+
+.modal-conteudo {
+  background-color: white;
+  padding: 2em;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.modal-botoes {
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-cancelar,
+.btn-confirmar {
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+}
+
+.btn-cancelar {
+  background-color: #aaa;
+  color: white;
+}
+
+.btn-confirmar {
+  background-color: #d9534f;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #888;
+}
+
+.btn-confirmar:hover {
+  background-color: #c9302c;
 }
