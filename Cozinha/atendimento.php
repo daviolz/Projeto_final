@@ -7,9 +7,19 @@ if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
   exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda'])) {
+
+// Marcar como pronta
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda']) && !isset($_POST['cancelar_comanda'])) {
     $id = intval($_POST['id_comanda']);
     $mysqli->query("UPDATE Comanda SET Status = 'pronto' WHERE Cod_comanda = $id");
+    header("Location: atendimento.php");
+    exit;
+}
+
+// Cancelar comanda (apenas atualiza o status para 'cancelada')
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda']) && isset($_POST['cancelar_comanda'])) {
+    $id = intval($_POST['id_comanda']);
+    $mysqli->query("UPDATE Comanda SET Status = 'cancelada' WHERE Cod_comanda = $id");
     header("Location: atendimento.php");
     exit;
 }
@@ -159,6 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
         $comandasPrep = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'preparando' AND DATE(Data_hora) = CURDATE()");
         if ($comandasPrep && $comandasPrep->num_rows > 0) {
             while($comanda = $comandasPrep->fetch_assoc()) {
+                if ($comanda['Status'] === 'cancelada') continue;
                 echo "<div class='pedido-item'>";
                 echo "<p><strong>Código:</strong> {$comanda['Cod_comanda']}</p>";
                 echo "<p><strong>Valor Total:</strong> R$ " . number_format($comanda['Valor_total'], 2, ',', '.') . "</p>";
@@ -189,7 +200,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
                           <button class='acao_atendimento' type='submit'>Marcar como Pronta</button>
                           </form>
                           </div>";
-                    
+                    if (isset($_SESSION['nivel']) && $_SESSION['nivel'] == 1) {
+                        echo "<div class='div_acao_atendimento'>
+                              <form method='post' action=''>
+                              <input type='hidden' name='id_comanda' value='{$comanda['Cod_comanda']}'>
+                              <input type='hidden' name='cancelar_comanda' value='1'>
+                              <button class='acao_atendimento' type='submit' onclick=\"return confirm('Tem certeza que deseja cancelar esta comanda?')\">Cancelar Pedido</button>
+                              </form>
+                              </div>";
+                    }
                 } else {
                     echo "<div style='margin-top:10px;'>Nenhum pedido para esta comanda.</div>";
                 }
@@ -207,6 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
         $comandasProntas = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'pronto' AND DATE(Data_hora) = CURDATE()");
         if ($comandasProntas && $comandasProntas->num_rows > 0) {
             while($comanda = $comandasProntas->fetch_assoc()) {
+                if ($comanda['Status'] === 'cancelada') continue;
                 echo "<div class='pedido-item'>";
                 echo "<p><strong>Código:</strong> {$comanda['Cod_comanda']}</p>";
                 echo "<p><strong>Valor Total:</strong> R$ " . number_format($comanda['Valor_total'], 2, ',', '.') . "</p>";
