@@ -164,14 +164,14 @@ h2 {
   margin-bottom: 20px;
 }
 
-.wrapper-cadastro {
+.wrapper-menu {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.container-cadastro {
+.container-menu {
   max-width: 800px;
   width: 100%;
   margin: 20px auto 20px auto;
@@ -463,7 +463,7 @@ label input[type="date"] {
 .btn-filtro[type="submit"] {
   width: 50px;
   height: 30px;
-  font-size: 16px;
+  font-size: 15px;
   background-color: #B77344;
   color: #fff;
   border-radius: 5px;
@@ -480,7 +480,7 @@ label input[type="date"] {
   margin-left: 10px;
   text-decoration: none;
   color: #B77344;
-  font-size: 16px;
+  font-size: 15px;
   border : 1px solid #ffffff;
   padding: 5px 10px ;
 }
@@ -543,3 +543,42 @@ label input[type="date"] {
   width: 6em;
 }
 
+select.tipinho,
+select.tipinho option  {
+  width: 6em;
+  height: 3em;
+  font-size: 0.7em;
+  color: #000 !important;
+}
+
+.input-box-cadastro select,
+.input-box-cadastro select:focus {
+  background-color: #fff !important;
+  color: #000 !important;
+  
+}
+
+
+/* Estilização dos selects do filtro do historico */
+
+.selecaofiltro:focus {
+  border: 2px solid #dfdfdf;
+  outline: none;
+  box-shadow: 0 0 5px #B7734433;
+}
+
+.select2-container {
+  width: 220px ; 
+  font-size: 16px;
+}
+.select2-selection {
+  height: 30px !important;
+  border-radius: 5px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.select2-selection__rendered {
+  line-height: 30px !important;
+}

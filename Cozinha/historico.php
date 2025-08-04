@@ -35,6 +35,7 @@ if (!empty($_GET['data'])) {
     $tipos .= "s";
 }
 
+// Junta os filtros selecionados para a consulta
 $where = "";
 if (count($filtros) > 0) {
     $where = "WHERE " . implode(" AND ", $filtros);
@@ -54,6 +55,7 @@ $sql = "SELECT Pedido.*, Comanda.Senha, Produto.Nome_produto, Produto_Variacao.N
         $where
         ORDER BY Pedido.Data_hora DESC";
 
+
 $stmt = $mysqli->prepare($sql);
 if (!$stmt) {
     die("Erro na preparação da query: " . $mysqli->error);
@@ -71,49 +73,39 @@ $result = $stmt->get_result();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Icone da Comes & Bebs -->
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+  <!-- Importa ícones da biblioteca Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- Bibliotecas de estilos CSS para a tabela e os selects -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <style>
-    .selecaofiltro:focus {
-  border: 2px solid #dfdfdf;
-  outline: none;
-  box-shadow: 0 0 5px #B7734433;
-}
 
-.select2-container {
-  width: 220px ; 
-  font-size: 16px;
-}
-.select2-selection {
-  height: 30px !important;
-  border-radius: 5px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-}
-.select2-selection__rendered {
-  line-height: 30px !important;
-}
   </style>
+  <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css">
-  <title>Histórico</title>
+  <!-- Titulo da Pagina -->
+  <title>Histórico de Pedidos</title>
 </head>
 
 <body>
   <header>
+    <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
+    <!-- Icone do menu de gerenciamento -->
     <i class="bx bxs-user-circle"></i>
   </header>
+  <!-- Navegador do menu de gerenciamento -->
   <nav id="menu">
+    <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
 
     <?php
+    // Limita para que somente quem tiver o login de gerente (nivel de acesso 1) possa utilizar essas funcionalidades
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
             <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
@@ -121,12 +113,17 @@ $result = $stmt->get_result();
             
     }
     ?>
-
+    <!-- Botão que leva pro logout -->
     <a href="PHP/Logout.php">Sair</a>
   </nav>
+
+  <!-- Conteudo da pagina -->
   <main id="content2">
+    <!-- Titulo -->
     <h2>Histórico de Pedidos</h2>
+    <!-- Forms pro filtro dos pedidos -->
     <form class="form_filtro" method="get" style="margin-bottom:20px;">
+      <!-- Filtro de pedidos pelas comandas -->
         <label class="nome_filtro">Comanda:
             <select class="filtro_comanda" name="comanda">
                 <option value="">Todas</option>
@@ -137,6 +134,7 @@ $result = $stmt->get_result();
                 <?php endwhile; ?>
             </select>
         </label>
+        <!-- Filtro de pedidos pelos produtos -->
         <label class="nome_filtro">Produto:
             <select class="filtro_produto" name="produto">
                 <option value="">Todos</option>
@@ -147,6 +145,7 @@ $result = $stmt->get_result();
                 <?php endwhile; ?>
             </select>
         </label>
+        <!-- Filtro de pedidos pelas variações -->
         <label class="nome_filtro">Variação:
             <select class="filtro_variação" name="variacao">
                 <option value="">Todas</option>
@@ -157,12 +156,16 @@ $result = $stmt->get_result();
                 <?php endwhile; ?>
             </select>
         </label>
+        <!-- Filtro de pedidos pela data -->
         <label class="nome_filtro">Data:
             <input class="filtro_data" type="date" name="data" value="<?= isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '' ?>">
         </label>
+        <!-- Botão para executar os filtros -->
         <button type="submit" class="btn-filtro">Filtrar</button>
+        <!-- Link para voltar pra pagina e limpar os filtros -->
         <a href="historico.php" class="btn-limpar">Limpar filtros</a>
     </form>
+    <!-- Tabela dos Pedidos -->
     <table border="1" cellpadding="6" cellspacing="0" style="width:100%;background:#fff;">
         <tr>
             <th>Código</th>
@@ -173,6 +176,7 @@ $result = $stmt->get_result();
             <th>Valor Pedido</th>
             <th>Data/Hora</th>
         </tr>
+        <!-- Dados dos Pedidos -->
         <?php if($result && $result->num_rows > 0): ?>
             <?php while($row = $result->fetch_assoc()): ?>
                 <tr>
@@ -185,20 +189,23 @@ $result = $stmt->get_result();
                     <td><?= $row['Data_hora'] ?></td>
                 </tr>
             <?php endwhile; ?>
+        <!-- Mensagem para mostrar quando nenhum pedido for encontrado -->
         <?php else: ?>
             <tr><td colspan="7">Nenhum pedido encontrado.</td></tr>
         <?php endif; ?>
     </table>
   </main>
+  <!-- Script para aplicar o plugin Select2 nos selects dos filtros  -->
   <script>
   $(document).ready(function() {
     $('select[name="comanda"], select[name="produto"], select[name="variacao"]').select2({
       width: 'resolve',
-      dropdownParent: $('.container-cadastro').length ? $('.container-cadastro') : $('body')
+      dropdownParent: $('body')
     });
   });
 </script>
 
+<!-- Script em Javascript para fazer a animação da navbar do menu -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const btnMenu = document.querySelector('.btn-menu');

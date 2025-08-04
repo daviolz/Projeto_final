@@ -126,6 +126,7 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
   </header>
  <nav id="menu">
     <!-- Links do menu lateral -->
+    <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
@@ -276,9 +277,8 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
         <?php endif; ?>
     </table>
   </main>
-
+<!-- Script em Javascript para fazer a animação da navbar do menu -->
   <script>
-    // Script para abrir/fechar o menu lateral
     document.addEventListener('DOMContentLoaded', function() {
       const btnMenu = document.querySelector('.btn-menu');
       const navMenu = document.getElementById('menu');
@@ -296,8 +296,8 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
       });
     });
   </script>
+  <!--  Script em Javascript que inicializa o Select2 nos selects de filtro -->
   <script>
-    // Inicializa o Select2 nos selects de filtro
     $(document).ready(function() {
       $('select[name="tipo_produto"], select[name="produto"], select[name="disponibilidade"]').select2({
         width: 'resolve',

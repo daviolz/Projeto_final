@@ -1,4 +1,5 @@
 <?php
+// Faz conexão com o banco de dados
 include("PHP/conexao.php");
 
 // Inicializa um array para armazenar mensagens de erro
@@ -54,7 +55,9 @@ if (isset($_POST['login']) && strlen($_POST['login']) > 0) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Icone da Comes & Bebs -->
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+  <!-- Titulo da Pagina -->
   <title>Login</title>
   <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css" />
@@ -73,8 +76,9 @@ if (isset($_POST['login']) && strlen($_POST['login']) > 0) {
     }
   }
   ?>
-
+  <!-- Div do formulario de Login -->
   <div class="wrapper">
+    <!-- Container do formulario de Login -->
     <div class="container-login">
       <!-- Formulário de login -->
       <form action="" method="POST">

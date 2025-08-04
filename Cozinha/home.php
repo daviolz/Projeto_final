@@ -1,4 +1,5 @@
 <?php
+// Faz a proteção para que não logins não autorizados entrem
 include("PHP/protect.php");
 ?>
 
@@ -8,23 +9,32 @@ include("PHP/protect.php");
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Importa ícones da biblioteca Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css">
+  <!-- Icone da Comes & Bebs -->
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+  <!-- Titulo da Pagina -->
   <title>Home</title>
 </head>
 
 <body>
   <header>
+    <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
+    <!-- Icone do menu de gerenciamento -->
     <i class="bx bxs-user-circle"></i>
   </header>
+  <!-- Navegador do menu de gerenciamento -->
   <nav id="menu">
+    <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
 
     <?php
+    // Limita para que somente quem tiver o login de gerente (nivel de acesso 1) possa utilizar essas funcionalidades
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
             <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
@@ -32,14 +42,17 @@ include("PHP/protect.php");
             
     }
     ?>
-
+    <!-- Botão que leva pro logout -->
     <a href="PHP/Logout.php">Sair</a>
   </nav>
-
+   
+  <!-- Conteudo da pagina -->
   <main id="content">
     <h1>Bem vindo!</h1>
-    <div class="wrapper-cadastro">
-      <div class="container-cadastro">
+    <!-- Menu principal da home page -->
+    <div class="wrapper-menu">
+      <div class="container-menu">
+        <!-- Limita para que somente quem tiver o login de gerente (nivel de acesso 1) possa utilizar essas funcionalidades -->
         <?php if($_SESSION['nivel'] == 1): ?>
         <div class="home-row">
           <div class="home-option">
@@ -53,7 +66,6 @@ include("PHP/protect.php");
                <div class="home-option">
             <a href="administrando_variacoes.php">Administrar Variações</a>
           </div>
-
         </div>
 
         <?php endif; ?>
@@ -66,7 +78,6 @@ include("PHP/protect.php");
             <a href="historico.php">Histórico Pedidos</a>
           </div>
 
-
         </div>
         
       </div>
@@ -75,7 +86,7 @@ include("PHP/protect.php");
     </div>
 
   </main>
-
+<!-- Script em Javascript para fazer a animação da navbar do menu -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const btnMenu = document.querySelector('.btn-menu');
