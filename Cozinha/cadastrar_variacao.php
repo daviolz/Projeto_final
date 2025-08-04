@@ -55,6 +55,7 @@ if ($_SESSION['nivel'] != 1) {
     <i class="bx bxs-user-circle"></i>
   </header>
  <nav id="menu">
+    <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
@@ -148,7 +149,8 @@ if ($_SESSION['nivel'] != 1) {
     }
   </script>
 
-  <script>
+<!-- Inicializa o Select2 no select de produtos e reinicializa após abrir/fechar o menu lateral -->
+<script>
   $(document).ready(function() {
     function initSelect2() {
       $('#produto').select2({

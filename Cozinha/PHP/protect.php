@@ -1,5 +1,9 @@
 <?php
 
+// Defina o tempo de vida da sessão para 8 horas (28800 segundos)
+ini_set('session.gc_maxlifetime', 28800);
+session_set_cookie_params(28800);
+
 include_once('conexao.php');
 
 if (!isset($_SESSION))

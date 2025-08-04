@@ -51,6 +51,7 @@ if ($_SESSION['nivel'] != 1) {
     <i class="bx bxs-user-circle"></i>
   </header>
   <nav id="menu">
+    <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
@@ -102,6 +103,7 @@ if ($_SESSION['nivel'] != 1) {
     </div>
   </main>
 
+  <!-- Script em Javascript para fazer a animação da navbar do menu -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const btnMenu = document.querySelector('.btn-menu');
