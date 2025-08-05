@@ -5,46 +5,44 @@ include("PHP/conexao.php");
 // Inicializa um array para armazenar mensagens de erro
 $erro = [];
 
+// Inicia a sessão caso ainda não tenha sido iniciada
+if (!isset($_SESSION)) {
+  session_start();
+}
+
 // Verifica se o formulário foi enviado e se o campo 'login' não está vazio
 if (isset($_POST['login']) && strlen($_POST['login']) > 0) {
 
-  // Inicia a sessão caso ainda não tenha sido iniciada
-  if (!isset($_SESSION)) {
-    session_start();
+  // Salva o login na sessão, escapando caracteres especiais para evitar SQL Injection
+  $_SESSION['login'] = $conexao->escape_string($_POST['login']);
 
-    // Salva o login na sessão, escapando caracteres especiais para evitar SQL Injection
-    $_SESSION['login'] = $conexao->escape_string($_POST['login']);
-    // Salva a senha na sessão (sem escape, pois será comparada diretamente)
-    $_SESSION['senha'] = $_POST['senha'];
+  // Monta a query para buscar o usuário pelo login informado
+  $sql_code = "SELECT Senha, Cod_usuario, Nivel FROM Usuario WHERE Login = '{$_SESSION['login']}'";
+  // Executa a query no banco de dados
+  $sql_query = $conexao->query($sql_code) or die($conexao->error);
+  // Busca os dados do usuário encontrado
+  $dado = $sql_query->fetch_assoc();
+  // Conta quantos usuários foram encontrados (deve ser 0 ou 1)
+  $total = $sql_query->num_rows;
 
-    // Monta a query para buscar o usuário pelo login informado
-    $sql_code = "SELECT Senha, Cod_usuario, Nivel FROM Usuario WHERE Login = '{$_SESSION['login']}'";
-    // Executa a query no banco de dados
-    $sql_query = $conexao->query($sql_code) or die($conexao->error);
-    // Busca os dados do usuário encontrado
-    $dado = $sql_query->fetch_assoc();
-    // Conta quantos usuários foram encontrados (deve ser 0 ou 1)
-    $total = $sql_query->num_rows;
-
-    // Se não encontrou nenhum usuário com esse login, adiciona mensagem de erro
-    if ($total == 0) {
-      $erro[] = "Não há usuários com este Login.";
+  // Se não encontrou nenhum usuário com esse login, adiciona mensagem de erro
+  if ($total == 0) {
+    $erro[] = "Não há usuários com este Login.";
+  } else {
+    // Se encontrou, verifica se a senha está correta
+    if ($dado['Senha'] == $_POST['senha']) {
+      // Se a senha está correta, salva o código do usuário e o nível de acesso na sessão
+      $_SESSION['usuario'] = $dado['Cod_usuario'];
+      $_SESSION['nivel'] = $dado['Nivel'];
     } else {
-      // Se encontrou, verifica se a senha está correta
-      if ($dado['Senha'] == $_SESSION['senha']) {
-        // Se a senha está correta, salva o código do usuário e o nível de acesso na sessão
-        $_SESSION['usuario'] = $dado['Cod_usuario'];
-        $_SESSION['nivel'] = $dado['Nivel'];
-      } else {
-        // Se a senha está incorreta, adiciona mensagem de erro
-        $erro[] = "Senha incorreta";
-      }
+      // Se a senha está incorreta, adiciona mensagem de erro
+      $erro[] = "Senha incorreta";
     }
+  }
 
-    // Se não houve erros, redireciona para a página home.php
-    if (count($erro) == 0 || !isset($erro)) {
-      echo "<script>location.href='home.php';</script>";
-    }
+  // Se não houve erros, redireciona para a página home.php
+  if (count($erro) == 0) {
+    echo "<script>location.href='home.php';</script>";
   }
 }
 ?>

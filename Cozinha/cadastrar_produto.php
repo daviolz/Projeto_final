@@ -1,5 +1,7 @@
 <?php
+// Faz a proteção para que logins não autorizados não entrem
 include("PHP/protect.php");
+// Verifica se o usuario tenha o nivel de acesso que permite utilizar esta pagina
 if ($_SESSION['nivel'] != 1) {
   echo "<script>alert('Você não tem permissão para acessar essa página!'); window.location.href='home.php';</script>";
 }
@@ -11,52 +13,33 @@ if ($_SESSION['nivel'] != 1) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Icone da Comes & Bebs -->
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+  <!-- Importa ícones da biblioteca Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css">
+  <!-- Titulo da Pagina -->
   <title>Cadastrar Produto</title>
-
-  <script>
-    function handlePhone(event) {
-      let input = event.target;
-      let value = input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
-
-      if (value.length > 10) {
-        value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
-      } else if (value.length > 5) {
-        value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-      } else if (value.length > 2) {
-        value = value.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
-      } else {
-        value = value.replace(/^(\d*)/, "($1");
-      }
-
-      input.value = value;
-    }
-
-
-    function validarEntrada(event) {
-      const tecla = event.key;
-      if (!/^\d$/.test(tecla) && tecla !== "Backspace" && tecla !== "Delete" && tecla !== "Tab") {
-        event.preventDefault(); // Impede a entrada de caracteres não numéricos
-      }
-    }
-  </script>
 
 </head>
 
 <body>
     <header>
+    <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
+    <!-- Icone de Usuario (placeholder) -->
     <i class="bx bxs-user-circle"></i>
   </header>
   <nav id="menu">
+    <!-- Navegador do menu de gerenciamento -->
     <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
 
     <?php
+    // Limita para que somente quem tiver o login de gerente (nivel de acesso 1) possa utilizar essas funcionalidades
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
             <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
@@ -64,14 +47,19 @@ if ($_SESSION['nivel'] != 1) {
             
     }
     ?>
-
+    <!-- Botão que leva pro logout -->
     <a href="PHP/Logout.php">Sair</a>
   </nav>
 
+  <!-- Conteudo da pagina -->
   <main id="content">
+        <!-- Titulo -->
         <h2>Cadastrar Produto</h2>
+    <!-- Cadastro de Produtos -->
     <div class="wrapper-cadastro">
+        <!-- Div de estilização do Forms de cadastro -->
         <div class="container-cadastro">
+            <!-- Form de cadastro de Produto -->
             <form action="PHP/nv_produto.php" method="POST" enctype="multipart/form-data">
             <div class="input-box-cadastro">
                 <label for="nome">Nome</label>
@@ -82,6 +70,7 @@ if ($_SESSION['nivel'] != 1) {
                 <textarea name="descricao" id="descricao" required></textarea>
             </div>
             <div class="input-box-cadastro">
+                <!-- Select para escolher para qual o tipo do produto -->
                 <label for="tipo">Tipo do produto</label>
                 <select class="tipinho" name="tipo" id="tipo">('bebida', 'salgado', 'doce','combo')
                   <option value="bebida">Bebida</option>
@@ -90,12 +79,14 @@ if ($_SESSION['nivel'] != 1) {
                   <option value="combo">Combo</option>
                 </select>
             </div>
-            
+
+                <!-- Campo para o usuario enviar a imagem referente ao produto -->
               <label for="descricao">Imagem do Produto</label>
               <input type="file" name="imagem" id="imagem" accept="image/*" required>
           
 
             <div class="button-box-cadastro">
+                <!-- Botão para executar o cadastro da variação -->
                 <input type="submit" value="Cadastrar" name="enviar">
             </div>
             </form>

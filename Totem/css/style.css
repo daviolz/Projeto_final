@@ -256,7 +256,7 @@ footer .op .baixo .op-btn {
 }
 
 /* Estilização para tablet */
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 500px)  and (max-width:800px) {
   .modal-conteudo {
     font-size: 1.5em;
     margin: 45% auto;

@@ -1,6 +1,7 @@
 <?php
-// Protege a página: só usuários autenticados podem acessar
+// Faz a proteção para que logins não autorizados não entrem
 include("PHP/protect.php");
+// Faz conexão com o banco de dados do projeto
 require_once("PHP/conexao.php");
 
 // Troca o status da variação se solicitado via GET (toggle)
@@ -112,40 +113,50 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
   <link rel="stylesheet" href="CSS/style.css">
   <!-- CSS e JS do Select2 para selects bonitos -->
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+  <!-- Importa o CSS do Select2, responsável pelo visual moderno do select -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- importa o jQuery, que é necessário para o funcionamento do Select2 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <!-- importa o JavaScript do Select2, que permite transformar o <select> de produtos em um campo de busca avançado -->
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- Titulo da Pagina -->
   <title>Home</title>
 </head>
 
 <body>
   <header>
-    <!-- Menu lateral e ícone de usuário -->
+    <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
+   <!-- Icone de Usuario (placeholder) -->
     <i class="bx bxs-user-circle"></i>
   </header>
- <nav id="menu">
-    <!-- Links do menu lateral -->
+  <!-- Navegador do menu de gerenciamento -->
+  <nav id="menu">
     <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
+
     <?php
-    // Se for admin, mostra opções administrativas
+    // Limita para que somente quem tiver o login de gerente (nivel de acesso 1) possa utilizar essas funcionalidades
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
             <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
             <a href='administrando_variacoes.php'>Administrar Variações</a>";
+            
     }
     ?>
-
+    <!-- Botão que leva pro logout -->
     <a href="PHP/Logout.php">Sair</a>
   </nav>
 
+  <!-- Conteudo da pagina -->
   <main id="content">
+    <!-- Titulo -->
     <h2>Variações de Produtos</h2>
     <!-- Formulário de filtros -->
     <form method="get" style="margin-bottom:20px;">
+        <!-- Filtro por meio dos tipos dos produtos -->
         <label>Tipo do Produto:
             <select class="filtro_tipo_variacao" name="tipo_produto" onchange="this.form.submit()">
                 <option value="">Todos</option>
@@ -156,6 +167,7 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
                 <?php endforeach; ?>
             </select>
         </label>
+        <!-- Filtro por meio dos produtos -->
         <label>Produto:
             <select name="produto" onchange="this.form.submit()">
                 <option value="">Todos</option>
@@ -169,6 +181,7 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
                 <?php endwhile; ?>
             </select>
         </label>
+        <!-- Filtro por meio da diponibilidade -->
         <label>Disponibilidade:
             <select name="disponibilidade" onchange="this.form.submit()">
                 <option value="">Todas</option>
@@ -190,6 +203,7 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
             <th>Ações</th>
             
         </tr>
+        <!-- Verifica se existem dados para exibir depois da busca e os exibe -->
         <?php if($result && $result->num_rows > 0): ?>
             <?php while($row = $result->fetch_assoc()): ?>
                 <tr>

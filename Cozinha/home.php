@@ -1,5 +1,5 @@
 <?php
-// Faz a proteção para que não logins não autorizados entrem
+// Faz a proteção para que logins não autorizados não entrem
 include("PHP/protect.php");
 ?>
 
@@ -23,7 +23,7 @@ include("PHP/protect.php");
   <header>
     <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
-    <!-- Icone do menu de gerenciamento -->
+    <!-- Icone de Usuario (placeholder) -->
     <i class="bx bxs-user-circle"></i>
   </header>
   <!-- Navegador do menu de gerenciamento -->

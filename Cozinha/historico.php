@@ -1,5 +1,7 @@
 <?php
+// Faz a proteção para que logins não autorizados não entrem
 include("PHP/protect.php");
+// Faz conexão com o banco de dados
 require_once("PHP/conexao.php");
 
 // Filtros
@@ -77,13 +79,12 @@ $result = $stmt->get_result();
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
   <!-- Importa ícones da biblioteca Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <!-- Bibliotecas de estilos CSS para a tabela e os selects -->
+  <!-- Importa o CSS do Select2, responsável pelo visual moderno do select -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- importa o jQuery, que é necessário para o funcionamento do Select2 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <!-- importa o JavaScript do Select2, que permite transformar o <select> de produtos em um campo de busca avançado -->
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <style>
-
-  </style>
   <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css">
   <!-- Titulo da Pagina -->
@@ -94,7 +95,7 @@ $result = $stmt->get_result();
   <header>
     <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
-    <!-- Icone do menu de gerenciamento -->
+   <!-- Icone de Usuario (placeholder) -->
     <i class="bx bxs-user-circle"></i>
   </header>
   <!-- Navegador do menu de gerenciamento -->
@@ -147,7 +148,7 @@ $result = $stmt->get_result();
         </label>
         <!-- Filtro de pedidos pelas variações -->
         <label class="nome_filtro">Variação:
-            <select class="filtro_variação" name="variacao">
+            <select class="filtro_variacao" name="variacao">
                 <option value="">Todas</option>
                 <?php while($v = $variacoes->fetch_assoc()): ?>
                     <option value="<?= $v['Cod_variacao'] ?>" <?= (isset($_GET['variacao']) && $_GET['variacao'] == $v['Cod_variacao']) ? 'selected' : '' ?>>
