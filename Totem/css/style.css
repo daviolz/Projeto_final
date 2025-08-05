@@ -27,6 +27,7 @@ nav ul li:hover {
   border: none;
   font-weight: bold;
   cursor: pointer;
+  color: black;
 }
 
 footer {
