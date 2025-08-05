@@ -96,7 +96,7 @@ $_SESSION['carrinho_total'] = $total;
       </div>
       <div class="baixo">
         <button class="op-btn cancelar" onclick="window.location.href='escolher.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Voltar</button>
-        <button class="op-btn fazer" onclick="window.location.href='pagamento.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Ir para pagamento</button>
+        <button class="op-btn fazer" onclick="window.location.href='pagamento.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Pagar</button>
       </div>
     </div>
   </footer>

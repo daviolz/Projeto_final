@@ -259,7 +259,7 @@ if (isset($_POST['cod_produto'])) {
             <div class="baixo">
                 <button class='op-btn cancelar' onclick="window.location.href='escolher.php?tipo_produto=<?php echo urlencode($_SESSION['tipo_produto']); ?>'">Voltar</button>
 
-                <button class='op-btn fazer' id="adicionar-footer-btn">Adicionar ao Carrinho</button>
+                <button class='op-btn fazer' id="adicionar-footer-btn">Carrinho</button>
             </div>
         </div>
     </footer>

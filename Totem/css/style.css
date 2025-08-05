@@ -249,6 +249,10 @@ footer .op .baixo .op-btn {
   .controle-qtd button {
     font-size: 1.5em;
   }
+
+  .bemvindo{
+    font-size: 0.6em;
+  }
 }
 
 /* Estilização para tablet */
