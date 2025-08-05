@@ -18,9 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Verifica se a imagem foi enviada sem erro
     if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == UPLOAD_ERR_OK) {
         $imagem = $_FILES['imagem'];
-        $nomeTemp = $imagem['tmp_name'];         // Caminho temporário do arquivo
-        $nomeOriginal = $imagem['name'];         // Nome original do arquivo
-        $extensao = pathinfo($nomeOriginal, PATHINFO_EXTENSION); // Extensão do arquivo
+        $nomeTemp = $imagem['tmp_name'];
+        $nomeOriginal = $imagem['name'];
+        $extensao = pathinfo($nomeOriginal, PATHINFO_EXTENSION);
+
+        // Verifica se o arquivo é realmente uma imagem
+        $info = getimagesize($nomeTemp);
+        if ($info === false) {
+            echo "<script>alert('O arquivo enviado não é uma imagem válida.'); window.history.back();</script>";
+            exit;
+        }
+
+        $extensoes_permitidas = ['jpg', 'jpeg', 'png', 'webp']; // adicione as que quiser permitir
+
+        if (!in_array(strtolower($extensao), $extensoes_permitidas)) {
+            echo "<script>alert('Tipo de imagem não permitido. Envie JPG, PNG, GIF, BMP ou WEBP.'); window.history.back();</script>";
+            exit;
+        }
 
         // Gera um nome de arquivo seguro baseado no nome do produto, substituindo caracteres especiais por "_"
         $nomeArquivo = preg_replace('/[^a-zA-Z0-9-_]/', '_', $nome);
