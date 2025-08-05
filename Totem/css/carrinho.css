@@ -23,8 +23,8 @@
   padding: 2em 2em;
 }
 
-@media screen and (max-width: 800px) {
-  .controle-qtd{
+@media screen and (min-width: 500px) {
+  .controle-qtd {
     padding: 5px 10px;
   }
 
@@ -35,7 +35,11 @@
   .qte-input {
     font-size: 1.5em;
   }
-  
+  .qte-menos,
+  .qte-mais,
+  .qte-input {
+    min-width: 30px;
+  }
 }
 
 @media screen and (min-width: 801px) {
@@ -43,8 +47,14 @@
     width: 60%;
   }
 
-  .controle-qtd button{
+  .controle-qtd button {
     font-size: 1.5em;
+  }
+
+  .qte-menos,
+  .qte-mais,
+  .qte-input {
+    min-width: 40px;
   }
 }
 
@@ -144,7 +154,6 @@
 .qte-menos,
 .qte-mais,
 .qte-input {
-  min-width: 40px;
   max-width: 60px;
   text-align: center;
 }

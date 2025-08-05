@@ -21,8 +21,26 @@
   object-fit: contain;
 }
 
+@media screen and (max-width: 499px) {
+  .div-conteudo {
+    grid-template-columns: 1fr 1fr;
+    margin: 2em 1em;
+  }
+
+  .div-produto {
+    height: auto;
+    font-size: 0.8em;
+    padding: 0.2em;
+  }
+
+  .imagem-produtos {
+    width: 75%;
+    aspect-ratio: 1 / 1;
+  }
+}
+
 /* Estilo para telas menores que 800px */
-@media screen and (max-width: 800px) {
+@media screen and (min-width: 500px) {
   .div-conteudo {
     grid-template-columns: 1fr 1fr;
   }
