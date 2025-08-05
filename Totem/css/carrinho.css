@@ -157,3 +157,33 @@
   max-width: 60px;
   text-align: center;
 }
+
+/* ...existing code... */
+
+/* Layout responsivo para telas até 500px */
+@media screen and (max-width: 500px) {
+  .div-produto-carrinho {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "imagem info"
+      "acoes acoes";
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  .imagem-produto-carrinho {
+    grid-area: imagem;
+  }
+
+  .info-produto {
+    grid-area: info;
+  }
+
+  .acoes-produto {
+    grid-area: acoes;
+    justify-self: start;
+    margin-top: 0.5em;
+  }
+}
