@@ -1,7 +1,9 @@
 <?php
+// Faz a proteção para que logins não autorizados não entrem
 include("PHP/protect.php");
+// Faz conexão com o banco de dados do projeto
 require_once("PHP/conexao.php");
-
+// Verifica se o usuario tenha o nivel de acesso que permite utilizar esta pagina
 if ($_SESSION['nivel'] != 1 && $_SESSION['nivel'] != 2) {
   echo "<script>alert('Você não tem permissão para acessar essa página!'); window.location.href='home.php';</script>";
   exit;
@@ -68,86 +70,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
     });
   </script>
 
-<style>
-.pedido-container {
-  display: flex;
-  padding: 20px;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center; 
-}
- 
-.pedido{
-  padding: 20px;
-  color: black;
-  background-color:rgb(255, 255, 255);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  width: calc(50% - 20px); 
-  
-}
-
-.pedido-item {
-  margin-bottom: 20px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
-
-.pedido h3 {
-  text-align: center;
-}
-
-.pedido p{
-  margin: 20px 0;
-  font-size: 18px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
-  
-}
-
-.pedido-list ul {
-  list-style-type: none;
-}
-
-.pedido-list ul li {
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-radius: 4px; 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-  color: #333;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-.pedido-list strong{
-  text-align: center;
-  margin-bottom: 10px;
-  display: block;
-  font-size: 20px;
-  margin-top: 30px;
-}
-
-
-  </style>
 </head>
 <body>
-  <header>
+    <header>
+    <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
+    <!-- Icone de Usuario (placeholder) -->
     <i class="bx bxs-user-circle"></i>
   </header>
- <nav id="menu">
+  <nav id="menu">
+    <!-- Navegador do menu de gerenciamento -->
     <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
 
     <?php
+    // Limita para que somente quem tiver o login de gerente (nivel de acesso 1) possa utilizar essas funcionalidades
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
             <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
@@ -155,9 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
             
     }
     ?>
-
+    <!-- Botão que leva pro logout -->
     <a href="PHP/Logout.php">Sair</a>
   </nav>
+
   <main id="content">
     <h2 style="text-align: center; padding: 20px;">Registrar Atendimento</h2>
     <!-- Exemplo de bloco para exibir as comandas e seus pedidos relacionados em duas colunas -->
@@ -166,7 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
     <div class="pedido">
         <h3>Comandas sendo preparadas</h3>
         <?php
+        // Faz a conexão com o banco de dados
         require_once("PHP/conexao.php");
+        // Busca os Dados das comandas que estão com o status "preparando" do dia de hoje
         $comandasPrep = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'preparando' AND DATE(Data_hora) = CURDATE()");
         if ($comandasPrep && $comandasPrep->num_rows > 0) {
             while($comanda = $comandasPrep->fetch_assoc()) {
@@ -224,6 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comanda_entrega'])
     <div class="pedido">
         <h3>Comandas prontas</h3>
         <?php
+        // Busca os Dados das comandas que estão com o status "pronta" do dia de hoje
         $comandasProntas = $mysqli->query("SELECT * FROM Comanda WHERE Status = 'pronto' AND DATE(Data_hora) = CURDATE()");
         if ($comandasProntas && $comandasProntas->num_rows > 0) {
             while($comanda = $comandasProntas->fetch_assoc()) {

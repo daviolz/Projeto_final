@@ -1,5 +1,7 @@
 <?php
+// Faz a proteção para que logins não autorizados não entrem
 include("PHP/protect.php");
+// Verifica se o usuario tenha o nivel de acesso que permite utilizar esta pagina
 if ($_SESSION['nivel'] != 1) {
   echo "<script>alert('Você não tem permissão para acessar essa página!'); window.location.href='home.php';</script>";
 }
@@ -9,58 +11,42 @@ if ($_SESSION['nivel'] != 1) {
 <html lang="pt-BR">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Icone da Comes & Bebs -->
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+  <!-- Importa ícones da biblioteca Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- Importa o CSS do Select2, responsável pelo visual moderno do select -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- importa o jQuery, que é necessário para o funcionamento do Select2 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <!-- importa o JavaScript do Select2, que permite transformar o <select> de produtos em um campo de busca avançado -->
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- CSS do projeto -->
   <link rel="stylesheet" href="CSS/style.css">
-  <title>Cadastrar aluno</title>
-
-  <script>
-    function handlePhone(event) {
-      let input = event.target;
-      let value = input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
-
-      if (value.length > 10) {
-        value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
-      } else if (value.length > 5) {
-        value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-      } else if (value.length > 2) {
-        value = value.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
-      } else {
-        value = value.replace(/^(\d*)/, "($1");
-      }
-
-      input.value = value;
-    }
-
-    function validarEntrada(event) {
-      const tecla = event.key;
-      if (!/^\d$/.test(tecla) && tecla !== "Backspace" && tecla !== "Delete" && tecla !== "Tab") {
-        event.preventDefault(); // Impede a entrada de caracteres não numéricos
-      }
-    }
-  </script>
-
-  
+  <!-- Titulo da Pagina -->
+  <title>Cadastrar Variação</title>
 
 </head>
 
 <body>
     <header>
+    <!-- Menu de gerenciamento -->
     <a href="#" class="btn-menu">&#9776; Gerenciamento</a>
+    <!-- Icone de Usuario (placeholder) -->
     <i class="bx bxs-user-circle"></i>
   </header>
  <nav id="menu">
+    <!-- Navegador do menu de gerenciamento -->
     <a href="home.php">Home</a>
     <a href="atendimento.php">Atendimento</a>
     <a href="historico.php">Historico de Pedidos</a>
 
 
     <?php
+    // Limita para que somente quem tiver o login de gerente (nivel de acesso 1) possa utilizar essas funcionalidades
     if ($_SESSION['nivel'] == 1) {
       echo "<a href='cadastrar_produto.php'>Cadastrar Produto</a>
             <a href='cadastrar_variacao.php'>Cadastrar Variação</a>
@@ -68,16 +54,22 @@ if ($_SESSION['nivel'] != 1) {
             
     }
     ?>
-
+    <!-- Botão que leva pro logout -->
     <a href="PHP/Logout.php">Sair</a>
   </nav>
 
+  <!-- Conteudo da pagina -->
   <main id="content">
+        <!-- Titulo -->
         <h2>Cadastro de variação de produto</h2>
+    <!-- Cadastro de variações -->
     <div class="wrapper-cadastro">
+        <!-- Div de estilização do Forms de cadastro -->
         <div class="container-cadastro">
+            <!-- Form de cadastro de Variações -->
             <form action="PHP/nv_variacao.php" method="POST">
             <div class="input-box-cadastro">
+                <!-- Select para escolher para qual produto teria está variação -->
                 <label for="produto">Produto</label>
                 <select name="cod_produto" id="produto" required>
                   <option value="">Selecione um produto</option>
@@ -91,14 +83,17 @@ if ($_SESSION['nivel'] != 1) {
                 </select>
             </div>
             <div class="input-box-cadastro">
+                <!-- Input para o usuario escrever o nome da variação -->
                 <label for="nome_variacao">Nome da Variação</label>
                 <input type="text" name="nome_variacao" id="nome_variacao" required>
             </div>
             <div class="input-box-cadastro">
+                <!-- Input para o usuario escrever o preço da variação -->
                 <label for="preco">Preço</label>
                 <input type="number" step="0.01" name="preco" id="preco" required>
             </div>
             <div class="button-box-cadastro">
+                <!-- Botão para executar o cadastro da variação -->
                 <button type="submit">Cadastrar Variação</button>
             </div>
             </form>
@@ -106,6 +101,7 @@ if ($_SESSION['nivel'] != 1) {
     </div>
   </main>
 
+<!-- Script em Javascript para fazer a animação da navbar do menu -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const btnMenu = document.querySelector('.btn-menu');
@@ -123,30 +119,6 @@ if ($_SESSION['nivel'] != 1) {
         }
       });
     });
-  </script>
-
-  <script>
-    // ...existing code...
-
-    function addObservacao() {
-      const container = document.getElementById('observacoes-container');
-      const group = document.createElement('div');
-      group.className = 'observacao-group';
-      group.innerHTML = `
-        <input type="text" name="observacao[]" placeholder="Digite uma observação">
-        <button type="button" onclick="addObservacao()">+</button>
-        <button type="button" onclick="removeObservacao(this)">-</button>
-      `;
-      container.appendChild(group);
-    }
-
-    function removeObservacao(btn) {
-      const group = btn.parentNode;
-      const container = document.getElementById('observacoes-container');
-      if (container.querySelectorAll('.observacao-group').length > 1) {
-        container.removeChild(group);
-      }
-    }
   </script>
 
 <!-- Inicializa o Select2 no select de produtos e reinicializa após abrir/fechar o menu lateral -->

@@ -164,14 +164,14 @@ h2 {
   margin-bottom: 20px;
 }
 
-.wrapper-menu {
+.wrapper-cadastro {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.container-menu {
+.container-cadastro {
   max-width: 800px;
   width: 100%;
   margin: 20px auto 20px auto;
@@ -581,4 +581,97 @@ select.tipinho option  {
 }
 .select2-selection__rendered {
   line-height: 30px !important;
+}
+
+/* Estilização do menu lateral */
+
+.wrapper-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-menu {
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto 20px auto;
+  border-radius: 5px;
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+  z-index: 2;
+  padding: 20px;
+}
+
+
+/* Estilização do atendimento */
+
+
+.pedido-container {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center; 
+}
+ 
+.pedido{
+  padding: 20px;
+  color: black;
+  background-color:rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: calc(50% - 20px); 
+  
+}
+
+.pedido-item {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.pedido h3 {
+  text-align: center;
+}
+
+.pedido p{
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  
+}
+
+.pedido-list ul {
+  list-style-type: none;
+}
+
+.pedido-list ul li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 4px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.pedido-list strong{
+  text-align: center;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 20px;
+  margin-top: 30px;
 }
