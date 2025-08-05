@@ -148,18 +148,7 @@ if (isset($_POST['cod_produto'])) {
             <div class="produto">
                 <img src="<?php echo '../' . $produto['Imagem_produto']; ?>" alt="<?php echo $produto['Nome_produto']; ?>" class="produto-img">
                 <h1><?php echo $produto['Nome_produto']; ?></h1>
-                <?php
 
-                // Pega o preço do produto
-                $query_sabores = "SELECT Preco FROM Produto_Variacao WHERE Cod_produto = '$cod_produto'";
-                $resultado_sabores = mysqli_query($conexao, $query_sabores);
-                if ($resultado_sabores && mysqli_num_rows($resultado_sabores) == 1) {
-                    $row_preco = mysqli_fetch_assoc($resultado_sabores);
-
-                    // Exibe o preço abaixo do nome do produto apenas se houver uma variação
-                    echo "<h2 style='margin-top: 0; color: #555;'>R$ " . number_format($row_preco['Preco'], 2, ',', '.') . "</h2>";
-                }
-                ?>
 
                 <p class="descricao"><?php echo $produto['Descricao_produto']; ?></p>
                 <hr>
@@ -167,7 +156,7 @@ if (isset($_POST['cod_produto'])) {
 
             <?php
             // Pega os sabores disponíveis para o produto
-            $query_sabores = "SELECT * FROM Produto_Variacao WHERE Cod_produto = '$cod_produto'";
+            $query_sabores = "SELECT * FROM Produto_Variacao WHERE Cod_produto = '$cod_produto' and Status = 'disponivel'";
             $resultado_sabores = mysqli_query($conexao, $query_sabores);
 
 
@@ -175,34 +164,7 @@ if (isset($_POST['cod_produto'])) {
 
 
                 $num_variacoes = mysqli_num_rows($resultado_sabores);
-
-                // Exibição caso o produto tenha apenas uma variação
-                if ($num_variacoes == 1) {
-
-                    $linha_sabor = mysqli_fetch_assoc($resultado_sabores);
-                    $cod_variacao = $linha_sabor['Cod_variacao'];
-                    $nome_variacao = $linha_sabor['Nome_variacao'];
-                    $preco_variacao = $linha_sabor['Preco'];
-                    echo "<div class='adicionar'>";
-                    echo "<form action='' method='POST'>";
-
-                    echo "<input type='hidden' name='cod_produto' value='" . $cod_produto . "'>";
-                    echo "<input type='hidden' name='nome_produto' value='" . $produto['Nome_produto'] . "'>";
-                    echo "<input type ='hidden' name='imagem_produto' value='" . $produto['Imagem_produto'] . "'>";
-                    echo "<input type='hidden' name='nome_variacao[$cod_variacao]' value='" . $nome_variacao . "'>";
-                    echo "<input type='hidden' name='preco_variacao[$cod_variacao]' value='" . $preco_variacao . "'>";
-
-                    echo "<div class='opcao-produto-unica'>";
-
-                    echo "<div class='controle-qtd'>";
-                    echo "<button type='button' class='qte-menos'>-</button>";
-                    echo "<input type='number' class='qte-input' name='qte[$cod_variacao]' value='1' min='0' required>";
-                    echo "<button type='button' class='qte-mais'>+</button>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</form>";
-                    echo "</div>";
-                } elseif ($num_variacoes > 1) {
+                if ($num_variacoes >= 1) {
                     // Exibição caso o produto tenha múltiplas variações
 
                     echo "<div class='linha-separadora'></div>";

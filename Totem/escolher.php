@@ -69,10 +69,14 @@ if (isset($_POST['tipo_produto'])) {
             while ($linha = mysqli_fetch_assoc($resultado)) {
                 // Consulta para contar as variações desse produto
                 $cod_produto = $linha['Cod_produto'];
-                $sql_var = "SELECT COUNT(*) as total, MIN(Preco) as preco_min FROM Produto_Variacao WHERE Cod_produto = '$cod_produto'";
+                $sql_var = "SELECT COUNT(*) as total, MIN(Preco) as preco_min FROM Produto_Variacao WHERE Cod_produto = '$cod_produto' and Status = 'disponivel'";
                 $res_var = mysqli_query($conexao, $sql_var);
                 $dados_var = mysqli_fetch_assoc($res_var);
                 $total_var = $dados_var['total'];
+                // Se não houver nenhuma variação o produto não é exibido
+                if ($total_var == 0) {
+                    continue;
+                }
                 $preco_min = $dados_var['preco_min'];
                 echo "<form action='adicionar_produto.php' method='POST'>";
                 echo "<div class='div-produto' onclick='this.closest(\"form\").submit();'>";
@@ -104,32 +108,32 @@ if (isset($_POST['tipo_produto'])) {
     </footer>
 
     <div id="modal-cancelar-pedido" class="modal-remocao">
-    <div class="modal-conteudo">
-        <h2>Cancelar Pedido</h2>
-        <p>Deseja realmente cancelar o pedido?</p>
-        <div class="modal-botoes">
-        <button id="btn-nao-cancelar" class="btn-cancelar">Não</button>
-        <button id="btn-sim-cancelar" class="btn-confirmar">Sim</button>
+        <div class="modal-conteudo">
+            <h2>Cancelar Pedido</h2>
+            <p>Deseja realmente cancelar o pedido?</p>
+            <div class="modal-botoes">
+                <button id="btn-nao-cancelar" class="btn-cancelar">Não</button>
+                <button id="btn-sim-cancelar" class="btn-confirmar">Sim</button>
+            </div>
         </div>
     </div>
-    </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-  function abrirModalCancelar() {
-    $('#modal-cancelar-pedido').fadeIn();
-  }
+        function abrirModalCancelar() {
+            $('#modal-cancelar-pedido').fadeIn();
+        }
 
-  $('#btn-nao-cancelar').on('click', function () {
-    $('#modal-cancelar-pedido').fadeOut();
-  });
+        $('#btn-nao-cancelar').on('click', function() {
+            $('#modal-cancelar-pedido').fadeOut();
+        });
 
-  $('#btn-sim-cancelar').on('click', function () {
-    window.location.href = 'php/deletar_comanda.php';
-  });
-</script>
+        $('#btn-sim-cancelar').on('click', function() {
+            window.location.href = 'php/deletar_comanda.php';
+        });
+    </script>
 
 </body>
 

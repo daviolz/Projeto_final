@@ -40,11 +40,11 @@ if (!isset($_SESSION['cod_comanda'])) {
                 <form class="pagamento-form" action="php/registrar_pedidos.php" method="post">
                     <div class="opcao">
                         <input type="radio" name="pagamento" id="credito" value="Crédito" required>
-                        <label for="credito"><img src="../img/cartao.png" alt="Cartão de Crédito">Cartão de Crédito</label>
+                        <label for="credito"><img src="../img/cartao.png" alt="Cartão de Crédito">Crédito</label>
                     </div>
                     <div class="opcao">
                         <input type="radio" name="pagamento" id="debito" value="Débito" required>
-                        <label for="debito"><img src="../img/cartao.png" alt="Cartão de Débito">Cartão de Débito</label>
+                        <label for="debito"><img src="../img/cartao.png" alt="Cartão de Débito">Débito</label>
                     </div>
                     <div class="opcao">
                         <input type="radio" name="pagamento" id="pix" value="Pix" required>
@@ -66,7 +66,7 @@ if (!isset($_SESSION['cod_comanda'])) {
                 <h2>Total: R$ <span id="footer-total"><?php echo number_format($_SESSION['carrinho_total'], 2, ',', '.'); ?></span></h2>
             </div>
             <div class="baixo">
-                <button class='op-btn cancelar' onclick="window.location.href='php/deletar_comanda.php'">Cancelar Pedido</button>
+                <button class='op-btn cancelar' onclick="window.location.href='carrinho.php'">Voltar</button>
                 <button class='op-btn fazer' disabled>Fazer pedido</button>
             </div>
         </div>

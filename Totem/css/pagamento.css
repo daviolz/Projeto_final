@@ -77,3 +77,17 @@
     height: 3em;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .opcoes-pagamento {
+    width: 85%;
+    padding: 2em;
+  }
+
+  .opcoes-pagamento form {
+    gap: 1.5em;
+  }
+  .opcao {
+    font-size: 1.1em;
+  }
+}
