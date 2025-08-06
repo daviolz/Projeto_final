@@ -27,9 +27,6 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho']) || !isset($_SE
     </div>
     <div class="spinner"></div>
     <div class="check"><img src="../img/check.png" alt="check" /></div>
-    <br>
-    <br>
-    <div class=""><img src="../img/QRCodeIhuhi.png" alt="check" /></div>
   </div>
 
   <script>

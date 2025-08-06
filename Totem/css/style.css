@@ -91,6 +91,7 @@ footer .op .baixo .op-btn {
 
 .bemvindo {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -100,7 +101,13 @@ footer .op .baixo .op-btn {
   font-size: 1.5em;
   justify-content: center;
   align-items: center;
-  margin-top: 18%;
+  margin: 2em 0 1em;
+}
+
+.bemvindo img {
+  width: 8em;
+  height: 8em;
+  object-fit: contain;
 }
 
 .conteudo-produto .produto .descricao {
@@ -251,13 +258,14 @@ footer .op .baixo .op-btn {
     font-size: 1.5em;
   }
 
-  .bemvindo{
+  .bemvindo {
     font-size: 0.6em;
+    margin-top: 15%;
   }
 }
 
 /* Estilização para tablet */
-@media screen and (min-width: 500px)  and (max-width:800px) {
+@media screen and (min-width: 500px) and (max-width: 800px) {
   .modal-conteudo {
     font-size: 1.5em;
     margin: 45% auto;
