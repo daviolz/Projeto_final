@@ -20,7 +20,15 @@ nav ul {
 nav ul li:hover {
   background-color: #b77344;
   border-radius: 10px;
+
 }
+  .qrcode{
+
+  }
+  .qrcode img{
+    width: 80px;
+    height: 80px;
+  }
 
 .btn-nav {
   background: none;
@@ -94,6 +102,7 @@ footer .op .baixo .op-btn {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 90%;
 }
 
 .bemvindo p {
@@ -102,12 +111,6 @@ footer .op .baixo .op-btn {
   justify-content: center;
   align-items: center;
   margin: 2em 0 1em;
-}
-
-.bemvindo img {
-  width: 8em;
-  height: 8em;
-  object-fit: contain;
 }
 
 .conteudo-produto .produto .descricao {
@@ -137,6 +140,16 @@ footer .op .baixo .op-btn {
 }
 
 @media screen and (max-width: 450px) {
+
+  .bemvindo img {
+  position: fixed;
+  bottom: 20%;
+  right: 10%;
+  width: 5em;
+  height: 5em;
+  object-fit: contain;
+}
+
   .modal-conteudo {
     margin: 50% auto;
     max-width: 600px;
@@ -266,6 +279,14 @@ footer .op .baixo .op-btn {
 
 /* Estilização para tablet */
 @media screen and (min-width: 500px) and (max-width: 800px) {
+  .bemvindo img {
+  position: fixed;
+  bottom: 20%;
+  right: 10%;
+  width: 5em;
+  height: 5em;
+  object-fit: contain;
+}
   .modal-conteudo {
     font-size: 1.5em;
     margin: 45% auto;
@@ -362,6 +383,15 @@ footer .op .baixo .op-btn {
 
 /* Estilização para desktop */
 @media screen and (min-width: 801px) {
+
+   .bemvindo img {
+  position: fixed;
+  bottom: 20%;
+  right: 10%;
+  width: 5em;
+  height: 5em;
+  object-fit: contain;
+}
   .modal-conteudo {
     margin: 15% auto;
   }

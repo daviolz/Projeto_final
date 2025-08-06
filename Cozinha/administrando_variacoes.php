@@ -94,8 +94,8 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
     $row = $res->fetch_assoc();
     if ($row['total'] == 0) {
         $mysqli->query("DELETE FROM Produto WHERE Cod_produto = $id");
+    header("Location: administrando_variacoes.php");
     }
-    header("Location: administrando_variacoes.php?" . http_build_query(array_diff_key($_GET, ['delete_produto'=>1])));
     exit;
 }
 ?>

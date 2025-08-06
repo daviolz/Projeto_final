@@ -56,9 +56,9 @@ if (!isset($_SESSION['carrinho'])) {
         <div class="bemvindo">
             <p>Bem vindo à nossa loja de salgados!
                 <br>Escolha o que deseja comprar.
+                <img src="../img/QRCodeIhuhi.png" alt="check" />
             </p>
-            <p><img src="../img/QRCodeIhuhi.png" alt="check" /><br>Sobre a empresa</p>
-
+    
         </div>
     </main>
     <footer>
