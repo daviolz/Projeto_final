@@ -34,6 +34,7 @@ $_SESSION['carrinho_total'] = $total;
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/carrinho.css" />
   <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
+  <script src="js/inatividade.js"></script>
   <title>Carrinho</title>
 
 

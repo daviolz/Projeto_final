@@ -108,7 +108,7 @@ if (isset($_GET['cod_produto'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/carrinho.css">
     <link rel="icon" type="image/png" href="../img/Comes-_1_.ico">
-    <!-- <script src="js/inatividade.js"></script> -->
+    <script src="js/inatividade.js"></script>
 </head>
 
 <body>
