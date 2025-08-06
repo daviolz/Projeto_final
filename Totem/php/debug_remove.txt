@@ -110,3 +110,609 @@ Resposta: Array
     [total_formatado] => 0,00
     [message] => Item removido com sucesso
 )
+POST: Array
+(
+    [cod_variacao] => 62
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 24
+            [nome_produto] => Chiclets
+            [cod_variacao] => 62
+            [nome_variacao] => Chiclets Sortido
+            [qte] => 1
+            [preco] => 1.00
+            [imagem_produto] => img/chiclets.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 1
+            [nome_produto] => Pastel
+            [cod_variacao] => 1
+            [nome_variacao] => Pastel de Carne
+            [qte] => 1
+            [preco] => 3.50
+            [imagem_produto] => img/pastel.png
+        )
+
+)
+SESSION depois: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 1
+            [nome_produto] => Pastel
+            [cod_variacao] => 1
+            [nome_variacao] => Pastel de Carne
+            [qte] => 1
+            [preco] => 3.50
+            [imagem_produto] => img/pastel.png
+        )
+
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 3.5
+    [total_formatado] => 3,50
+    [message] => Item removido com sucesso
+)
+POST: Array
+(
+    [cod_variacao] => 1
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 1
+            [nome_produto] => Pastel
+            [cod_variacao] => 1
+            [nome_variacao] => Pastel de Carne
+            [qte] => 1
+            [preco] => 3.50
+            [imagem_produto] => img/pastel.png
+        )
+
+)
+SESSION depois: Array
+(
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 0
+    [total_formatado] => 0,00
+    [message] => Item removido com sucesso
+)
+POST: Array
+(
+    [cod_variacao] => 4
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [3] => Array
+        (
+            [cod_produto] => 1
+            [nome_produto] => Pastel
+            [cod_variacao] => 1
+            [nome_variacao] => Pastel de Carne
+            [qte] => 9
+            [preco] => 3.50
+            [imagem_produto] => img/pastel.png
+        )
+
+    [4] => Array
+        (
+            [cod_produto] => 2
+            [nome_produto] => Coxinha
+            [cod_variacao] => 3
+            [nome_variacao] => Coxinha de Frango
+            [qte] => 1
+            [preco] => 6.50
+            [imagem_produto] => img/coxinha.png
+        )
+
+    [5] => Array
+        (
+            [cod_produto] => 2
+            [nome_produto] => Coxinha
+            [cod_variacao] => 4
+            [nome_variacao] => Coxinha de Frango c/ Catupiry
+            [qte] => 5
+            [preco] => 7.00
+            [imagem_produto] => img/coxinha.png
+        )
+
+)
+SESSION depois: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [3] => Array
+        (
+            [cod_produto] => 1
+            [nome_produto] => Pastel
+            [cod_variacao] => 1
+            [nome_variacao] => Pastel de Carne
+            [qte] => 9
+            [preco] => 3.50
+            [imagem_produto] => img/pastel.png
+        )
+
+    [4] => Array
+        (
+            [cod_produto] => 2
+            [nome_produto] => Coxinha
+            [cod_variacao] => 3
+            [nome_variacao] => Coxinha de Frango
+            [qte] => 1
+            [preco] => 6.50
+            [imagem_produto] => img/coxinha.png
+        )
+
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 49.5
+    [total_formatado] => 49,50
+    [message] => Item removido com sucesso
+)
+POST: Array
+(
+    [cod_variacao] => 1
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [3] => Array
+        (
+            [cod_produto] => 1
+            [nome_produto] => Pastel
+            [cod_variacao] => 1
+            [nome_variacao] => Pastel de Carne
+            [qte] => 9
+            [preco] => 3.50
+            [imagem_produto] => img/pastel.png
+        )
+
+    [4] => Array
+        (
+            [cod_produto] => 2
+            [nome_produto] => Coxinha
+            [cod_variacao] => 3
+            [nome_variacao] => Coxinha de Frango
+            [qte] => 1
+            [preco] => 6.50
+            [imagem_produto] => img/coxinha.png
+        )
+
+)
+SESSION depois: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [3] => Array
+        (
+            [cod_produto] => 2
+            [nome_produto] => Coxinha
+            [cod_variacao] => 3
+            [nome_variacao] => Coxinha de Frango
+            [qte] => 1
+            [preco] => 6.50
+            [imagem_produto] => img/coxinha.png
+        )
+
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 18
+    [total_formatado] => 18,00
+    [message] => Item removido com sucesso
+)
+POST: Array
+(
+    [cod_variacao] => 3
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [3] => Array
+        (
+            [cod_produto] => 2
+            [nome_produto] => Coxinha
+            [cod_variacao] => 3
+            [nome_variacao] => Coxinha de Frango
+            [qte] => 1
+            [preco] => 6.50
+            [imagem_produto] => img/coxinha.png
+        )
+
+)
+SESSION depois: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 11.5
+    [total_formatado] => 11,50
+    [message] => Item removido com sucesso
+)
+POST: Array
+(
+    [cod_variacao] => 22
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [3] => Array
+        (
+            [cod_produto] => 7
+            [nome_produto] => Quibe
+            [cod_variacao] => 22
+            [nome_variacao] => Quibe
+            [qte] => 2
+            [preco] => 6.50
+            [imagem_produto] => img/quibe.png
+        )
+
+)
+SESSION depois: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 11.5
+    [total_formatado] => 11,50
+    [message] => Item removido com sucesso
+)
+POST: Array
+(
+    [cod_variacao] => 25
+)
+
+SESSION antes: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 25
+            [nome_variacao] => Refrigerante Coca-Cola
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+    [2] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+)
+SESSION depois: Array
+(
+    [0] => Array
+        (
+            [cod_produto] => 14
+            [nome_produto] => Café
+            [cod_variacao] => 47
+            [nome_variacao] => Café Preto Tradicional
+            [qte] => 1
+            [preco] => 1.50
+            [imagem_produto] => img/cafe.png
+        )
+
+    [1] => Array
+        (
+            [cod_produto] => 9
+            [nome_produto] => Refrigerante 350ml
+            [cod_variacao] => 26
+            [nome_variacao] => Refrigerante Guaraná
+            [qte] => 1
+            [preco] => 5.00
+            [imagem_produto] => img/refrigerante.png
+        )
+
+)
+
+Resposta: Array
+(
+    [success] => 1
+    [total] => 6.5
+    [total_formatado] => 6,50
+    [message] => Item removido com sucesso
+)

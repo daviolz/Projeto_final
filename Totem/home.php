@@ -27,7 +27,7 @@ if (!isset($_SESSION['carrinho'])) {
 
 <body>
     <nav>
-        <form action="escolher.php" method="post">
+        <form action="escolher.php" method="get">
             <ul>
                 <li>
                     <button type="submit" name="tipo_produto" value="salgado" class='btn-nav'>

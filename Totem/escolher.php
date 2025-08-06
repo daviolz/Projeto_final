@@ -32,7 +32,7 @@ if (isset($_POST['tipo_produto'])) {
 
 <body>
     <nav>
-        <form action="escolher.php" method="POST">
+        <form action="escolher.php" method="get">
             <ul>
                 <li>
                     <button type="submit" name="tipo_produto" value="salgado" class='btn-nav'>
@@ -78,7 +78,7 @@ if (isset($_POST['tipo_produto'])) {
                     continue;
                 }
                 $preco_min = $dados_var['preco_min'];
-                echo "<form action='adicionar_produto.php' method='POST'>";
+                echo "<form action='adicionar_produto.php' method='GET'>";
                 echo "<div class='div-produto' onclick='this.closest(\"form\").submit();'>";
                 echo "<img class='imagem-produtos' src='../" . $linha['Imagem_produto'] . "' alt='" . $linha['Nome_produto'] . "'>";
                 echo "<p>" . $linha['Nome_produto'] . "</p>";

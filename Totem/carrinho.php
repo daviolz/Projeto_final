@@ -73,7 +73,7 @@ $_SESSION['carrinho_total'] = $total;
                   <input type='number' class='qte-input' name='qte[<?php echo $produto['cod_variacao'] ?>]' value='<?php echo $produto['qte']; ?>' min="1" data-preco="<?php echo $produto['preco']; ?>" />
                   <button type='button' class='qte-mais'>+</button>
                 </div>
-                <button class="btn-remover-produto" data-cod-variacao="<?php echo $produto['cod_variacao']; ?>" title="Remover este produto">🗑️</button>
+                <button class="btn-remover-produto" data-cod-variacao="<?php echo $produto['cod_variacao']; ?>" title="Remover este produto"><img src="../img/lixo.png" alt="lixo"></button>
               </div>
 
             </div>

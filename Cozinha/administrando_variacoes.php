@@ -82,7 +82,7 @@ $result = $stmt->get_result();
 if (isset($_GET['delete_variacao']) && is_numeric($_GET['delete_variacao'])) {
     $id = intval($_GET['delete_variacao']);
     $mysqli->query("DELETE FROM Produto_Variacao WHERE Cod_variacao = $id");
-    header("Location: administando_variacoes.php?" . http_build_query(array_diff_key($_GET, ['delete_variacao'=>1])));
+    header("Location: administrando_variacoes.php?" . http_build_query(array_diff_key($_GET, ['delete_variacao'=>1])));
     exit;
 }
 
@@ -95,7 +95,7 @@ if (isset($_GET['delete_produto']) && is_numeric($_GET['delete_produto'])) {
     if ($row['total'] == 0) {
         $mysqli->query("DELETE FROM Produto WHERE Cod_produto = $id");
     }
-    header("Location: administando_variacoes.php?" . http_build_query(array_diff_key($_GET, ['delete_produto'=>1])));
+    header("Location: administrando_variacoes.php?" . http_build_query(array_diff_key($_GET, ['delete_produto'=>1])));
     exit;
 }
 ?>

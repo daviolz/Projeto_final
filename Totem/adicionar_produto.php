@@ -70,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['qte'])) {
 }
 
 // Recupera dados do produto para exibição
-if (isset($_POST['cod_produto'])) {
-    $cod_produto = $_POST['cod_produto'];
+if (isset($_GET['cod_produto'])) {
+    $cod_produto = $_GET['cod_produto'];
 
     // Pega todas as informações do produto 
     $query = "SELECT * FROM Produto WHERE cod_produto = '$cod_produto'";
@@ -115,7 +115,7 @@ if (isset($_POST['cod_produto'])) {
 
     <!-- Nav Bar com as opções -->
     <nav>
-        <form action="escolher.php" method="post">
+        <form action="escolher.php" method="get">
             <ul>
                 <li>
                     <button type="submit" name="tipo_produto" value="salgado" class='btn-nav'>
